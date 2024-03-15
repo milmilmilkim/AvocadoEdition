@@ -2,6 +2,14 @@
 include_once('./_common.php');
 define('_INDEX_', true);
 
+
+// 테마의 index가 적용되도록 수정
+if(defined('G5_THEME_PATH')) {
+	require_once(G5_THEME_PATH.'/index.php');
+	return;
+}
+
+
 if(!$is_member && !$config['cf_open']) { 
 	// 멤버가 아니고, 사이트 오픈이 되어 있지 않은 경우 로그인 페이지로 점프 시키기
 	goto_url(G5_BBS_URL.'/login.php');

@@ -15,13 +15,13 @@ add_stylesheet('<link rel="stylesheet" href="'.G5_THEME_CSS_URL.'/index.css">', 
 </div>
 <? } ?>
 
-<!-- 콘텐츠 시작 -->
+<!-- 콘텐츠 시작 ~ -->
 <div id="wrapper">
 	<iframe src="./main.php" name="frm_main" id="main" border="0" frameborder="0" marginheight="0" marginwidth="0" topmargin="0" scrolling="auto" allowTransparency="true"></iframe>
 </div>
 
 <script>
-	console.log('내가 적용되니?')
+	console.log('here')
 $(document.body).on("keydown", this, function (event) {
 	if (event.keyCode == 116) {
 		document.getElementById('main').contentDocument.location.reload(true);
