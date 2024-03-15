@@ -26,22 +26,27 @@ include_once ('./_common.php');
 
 	<link rel="shortcut icon" href="<?= $config['cf_favicon'] ?>">
 	<link rel="icon" href="<?= $config['cf_favicon'] ?>">
+	<?
+	if (!$config['cf_7']) {
+		echo '<link rel="stylesheet" href="' . G5_DATA_URL . '/css/_design.config.css" type="text/css" />';
+	}
+	?>
 	<link media="all" type="text/css" rel="stylesheet" href="<?= G5_THEME_CSS_URL ?>/enter.css">
 
 </head>
 
 <body>
 
-
 	<div class="wrapper" id="m-main-enter">
-		<div class="inner">
-			<div class="index-logo">
-				<p class="txt-default">화면 클릭시 전환됨</p>
-			</div>
-		</div>
+		<video autoplay muted id="m-main-video">
+			<source src="<?= G5_THEME_IMG_URL ?>/intro.mp4" type="video/mp4">
+			이 브라우저는 video 태그를 지원하지 않습니다.
+		</video>
 	</div>
 
-	<script></script>
+	<script>
+
+	</script>
 
 </body>
 

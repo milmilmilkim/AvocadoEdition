@@ -3,8 +3,13 @@ include_once ('./_common.php');
 define('_MAIN_', true);
 include_once (G5_THEME_PATH . '/head.php');
 include_once (G5_PATH . "/intro.php");
+add_stylesheet('<link rel="stylesheet" href="' . G5_THEME_CSS_URL . '/main.css">', 0);
+
 ?>
 
+<div>
+    zzzzkdjfnsdkj
+</div>
 <?php
 $banner = array();
 $sql = " select * from {$g5['banner_table']} where '" . G5_TIME_YMDHIS . "' between bn_begin_time and bn_end_time order by bn_order, bn_id desc ";

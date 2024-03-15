@@ -36,14 +36,39 @@ include_once (G5_THEME_PATH . "/enter.php");
 	});
 
 	// 모던 브라우저 정책을 위해 클릭 시 재생
-	const wrapper = document.querySelector('#m-main-enter');
+	const enterPage = document.querySelector('#m-main-enter');
 	const audio = document.querySelector('#m-music-player')
 	const mainIframe = document.querySelector('#main')
-	wrapper.addEventListener('click', (e) => {
-		audio.play();
+	const video = document.querySelector('#m-main-video');
+
+	const action = () => {
+		enterPage.addEventListener('click', (e) => {
+			video.play();
+		})
+	}
+
+	const pauseAtTime = (targetTime) => {
+		if (video.currentTime >= targetTime) {
+			console.log(video.currentTime)
+			video.pause();
+			video.removeEventListener('timeupdate', timeUpdateHandler);
+			action();
+
+		}
+	};
+
+	const timeUpdateHandler = () => {
+		pauseAtTime(3.6);
+	}
+
+	video.addEventListener('timeupdate', timeUpdateHandler);
+
+	video.addEventListener('ended', () => {
+		audio.play()
 		mainIframe.setAttribute('src', './main.php')
-		e.currentTarget.style = 'display: none;'
+		enterPage.style = 'display: none;'
 	})
+
 
 
 </script>
