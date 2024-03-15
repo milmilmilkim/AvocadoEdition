@@ -1,12 +1,15 @@
 <?
 	include_once('./_common.php');
-	if($is_member & !$config['cf_open']) {
-		goto_url(G5_URL.'/main.php');
-	}
+	
 	if(defined('G5_THEME_PATH')) {
 		require_once(G5_THEME_PATH.'/enter.php');
 		return;
 	}
+
+	if($is_member & !$config['cf_open']) {
+		goto_url(G5_URL.'/main.php');
+	}
+	
 	
 	/*********** Logo Data ************/
 	$logo = get_logo('pc');

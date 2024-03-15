@@ -4,7 +4,7 @@ define('_INDEX_', true);
 
 
 // 테마의 index가 적용되도록 수정
-if(defined('G5_THEME_PATH')) {
+if(defined('G5_THEME_PATH') && is_file(G5_THEME_PATH.'/index.php')) {
 	require_once(G5_THEME_PATH.'/index.php');
 	return;
 }
