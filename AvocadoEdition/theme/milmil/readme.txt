@@ -1,4 +1,4 @@
-Theme Name: 샘플
+Theme Name: 밀밀테마 
 Theme URI: 
 Maker: Milmil
 Maker URI: https://github.com/milmilkim

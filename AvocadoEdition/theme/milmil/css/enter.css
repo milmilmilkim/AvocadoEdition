@@ -40,19 +40,3 @@ body {
   display: inline-block;
   text-decoration: none;
 }
-
-@media all and (max-width: 640px) {
-  .index-logo {
-    font-size: 14px;
-  }
-}
-@media all and (max-width: 480px) {
-  .index-logo {
-    font-size: 13px;
-  }
-}
-@media all and (max-width: 380px) {
-  .index-logo {
-    font-size: 12px;
-  }
-}

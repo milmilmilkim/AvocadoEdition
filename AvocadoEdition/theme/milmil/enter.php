@@ -24,6 +24,7 @@
 	<link rel="shortcut icon" href="<?=$config['cf_favicon']?>">
 	<link rel="icon" href="<?=$config['cf_favicon']?>">
 	<link media="all" type="text/css" rel="stylesheet" href="<?=G5_THEME_CSS_URL?>/enter.css">
+	
 </head>
 <body>
 
