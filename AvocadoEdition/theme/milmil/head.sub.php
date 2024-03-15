@@ -68,7 +68,7 @@ if (defined('G5_IS_ADMIN')) {
 } else {
 	echo '<link rel="stylesheet" href="'.G5_THEME_CSS_URL.'/default.css" type="text/css">'.PHP_EOL;
 	if(!$config['cf_7']) { 
-		echo '<link rel="stylesheet" href="'.G5_DATA_URL.'/css/_design.config.css" type="text/css" />';
+		echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/_design.config.css" type="text/css" />';
 	}
 	echo '<link rel="stylesheet" href="'.G5_THEME_CSS_URL.'/style.css" type="text/css">'.PHP_EOL;
 }

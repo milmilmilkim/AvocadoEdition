@@ -1,6 +1,5 @@
 <?
 	include_once('./_common.php');
-
 ?>
 <!doctype html>
 <html lang="ko">
@@ -24,14 +23,7 @@
 
 	<link rel="shortcut icon" href="<?=$config['cf_favicon']?>">
 	<link rel="icon" href="<?=$config['cf_favicon']?>">
-	<link media="all" type="text/css" rel="stylesheet" href="<?=G5_CSS_URL?>/enter.css">
-	<?
-		if(!$config['cf_7']) { 
-			echo '<link rel="stylesheet" href="'.G5_DATA_URL.'/css/_design.config.css" type="text/css" />';
-		}
-	?>
-
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<link media="all" type="text/css" rel="stylesheet" href="<?=G5_THEME_CSS_URL?>/enter.css">
 </head>
 <body>
 
@@ -40,20 +32,13 @@
 	<div class="inner">
 		<div class="index-logo">
 			<a href="./main.php">
-				<?=$logo_data?>
 				<p class="txt-default">본 홈페이지는 1920 * 1080 PC를 기준으로 제작되었으며, 크롬 브라우저 이용을 권장합니다.</p>
 			</a>
 		</div>
 	</div>
 </div>
 
-<script>
-
-window.onload=function() {
-	$('html').addClass('on')
-	setTimeout(function() { $('html').addClass('active') }, 800);
-};
-</script>
+<script></script>
 
 </body>
 </html>
