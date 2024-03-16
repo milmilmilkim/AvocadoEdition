@@ -1,0 +1,15 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: black url('../img/bg-img.png') no-repeat center center fixed;
+}
+
+#m-common-container {
+  min-width: 1440px;
+  height: 100%;
+}

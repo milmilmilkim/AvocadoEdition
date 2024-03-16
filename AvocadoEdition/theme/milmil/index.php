@@ -35,7 +35,7 @@ include_once (G5_THEME_PATH . "/enter.php");
 		}
 	});
 
-	// 모던 브라우저 정책을 위해 클릭 시 재생
+	// 모던 브라우저 정책을 위해 동영상 영역 클릭 시 음악 재생 관련 로직
 	const enterPage = document.querySelector('#m-main-enter');
 	const audio = document.querySelector('#m-music-player')
 	const mainIframe = document.querySelector('#main')
@@ -58,7 +58,7 @@ include_once (G5_THEME_PATH . "/enter.php");
 	};
 
 	const timeUpdateHandler = () => {
-		pauseAtTime(3.6);
+		pauseAtTime(3.67);
 	}
 
 	video.addEventListener('timeupdate', timeUpdateHandler);

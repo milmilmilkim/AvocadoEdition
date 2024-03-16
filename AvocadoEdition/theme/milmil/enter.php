@@ -1,5 +1,6 @@
 <?
 include_once ('./_common.php');
+
 ?>
 <!doctype html>
 <html lang="ko">
@@ -38,13 +39,14 @@ include_once ('./_common.php');
 <body>
 
 	<div class="wrapper" id="m-main-enter">
-		<video autoplay muted id="m-main-video">
+		<video autoplay muted id="m-main-video" playsinline>
 			<source src="<?= G5_THEME_IMG_URL ?>/intro.mp4" type="video/mp4">
 			이 브라우저는 video 태그를 지원하지 않습니다.
 		</video>
 	</div>
 
 	<script>
+
 
 	</script>
 
