@@ -2,14 +2,30 @@ html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
 body {
   background: black url('../img/bg-img.png') no-repeat center center fixed;
 }
 
+*,
+body {
+  box-sizing: border-box;
+}
+
 #m-common-container {
   min-width: 1440px;
-  height: 100%;
+  min-height: 100%;
+  animation: fadeInUp 0.5s ease-out forwards; /* 애니메이션 적용 */
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

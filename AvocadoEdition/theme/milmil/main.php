@@ -76,16 +76,13 @@ for ($i = 0; $row = sql_fetch_array($result); $i++) {
         direction: 'vertical',
         loop: true,
         autoplay: {
-            delay: 3000,
+            delay: 4000,
         },
         effect: 'fade',
         fadeEffect: {
             crossFade: true
         },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
+
     });
 </script>
 

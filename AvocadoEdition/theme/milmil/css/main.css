@@ -34,6 +34,7 @@
 
 .main-content-wrapper {
   margin-top: 20px;
+  margin-bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,7 +97,7 @@
   top: 1;
   left: 2;
   width: 700px;
-  height: 402px;
+  height: 399px;
   border-radius: 10%;
   background: url('../img/box-bg.png') no-repeat center center;
   background-size: cover;
