@@ -9,7 +9,7 @@
 .banner-wrapper::before {
   content: '';
   position: absolute;
-  top: -1;
+  top: -2;
   left: 0;
   min-width: 1440;
   height: 300px;
@@ -27,7 +27,7 @@
 .swiper-slide img {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 99%;
   object-fit: cover;
   cursor: pointer;
 }

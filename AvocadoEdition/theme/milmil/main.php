@@ -78,6 +78,10 @@ for ($i = 0; $row = sql_fetch_array($result); $i++) {
         autoplay: {
             delay: 3000,
         },
+        effect: 'fade',
+        fadeEffect: {
+            crossFade: true
+        },
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
