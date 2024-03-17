@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+body {
+  background: black url('../img/bg-img.png') no-repeat center center fixed;
+}
+
 .banner-wrapper {
   position: relative;
   box-sizing: border-box;
@@ -12,9 +16,10 @@
   top: -2;
   left: 0;
   min-width: 1440;
+  width: 100%;
   height: 300px;
   background: url('../img/swiper/frame.png') no-repeat center center;
-  background-size: cover;
+  background-size: 100% 100%;
   z-index: 2;
   pointer-events: none;
 }

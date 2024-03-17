@@ -4,10 +4,6 @@ body {
   padding: 0;
 }
 
-body {
-  background: black url('../img/bg-img.png') no-repeat center center fixed;
-}
-
 *,
 body {
   box-sizing: border-box;
@@ -15,7 +11,6 @@ body {
 
 #m-common-container {
   min-width: 1440px;
-  min-height: 100%;
   animation: fadeInUp 0.5s ease-out forwards; /* 애니메이션 적용 */
 }
 

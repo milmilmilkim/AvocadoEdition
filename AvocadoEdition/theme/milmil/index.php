@@ -10,7 +10,6 @@ if (!$is_member && !$config['cf_open']) {
 	goto_url(G5_BBS_URL . '/login.php');
 	exit;
 }
-include_once (G5_THEME_PATH . "/enter.php");
 ?>
 
 
@@ -21,13 +20,15 @@ include_once (G5_THEME_PATH . "/enter.php");
 	</audio>
 </div>
 
-<!-- 콘텐츠 시작 ~ -->
+<!-- 콘텐츠 시작 -->
 <div id="wrapper">
-	<iframe name="frm_main" id="main" border="0" frameborder="0" marginheight="0" marginwidth="0" topmargin="0"
-		scrolling="auto" allowTransparency="true"></iframe>
+	<iframe id="m-main-iframe" src="./enter.php" name="frm_main" border="0" frameborder="0" marginheight="0"
+		marginwidth="0" topmargin="0" scrolling="auto" allowTransparency="true"></iframe>
 </div>
 
+
 <script>
+	// 기존에 있던 코드.. F5에 새로고침 
 	$(document.body).on("keydown", this, function (event) {
 		if (event.keyCode == 116) {
 			document.getElementById('main').contentDocument.location.reload(true);
@@ -35,41 +36,13 @@ include_once (G5_THEME_PATH . "/enter.php");
 		}
 	});
 
-	// 모던 브라우저 정책을 위해 동영상 영역 클릭 시 음악 재생 관련 로직
-	const enterPage = document.querySelector('#m-main-enter');
+	// 모던 브라우저 정책을 위해 클릭시 음악 재생
 	const audio = document.querySelector('#m-music-player')
-	const mainIframe = document.querySelector('#main')
-	const video = document.querySelector('#m-main-video');
-
-	const action = () => {
-		enterPage.addEventListener('click', (e) => {
-			video.play();
-		})
-	}
-
-	const pauseAtTime = (targetTime) => {
-		if (video.currentTime >= targetTime) {
-			console.log(video.currentTime)
-			video.pause();
-			video.removeEventListener('timeupdate', timeUpdateHandler);
-			action();
-
+	window.addEventListener('message', function (event) {
+		if (event.data === 'playAudio') {
+			audio.play();
 		}
-	};
-
-	const timeUpdateHandler = () => {
-		pauseAtTime(3.67);
-	}
-
-	video.addEventListener('timeupdate', timeUpdateHandler);
-
-	video.addEventListener('ended', () => {
-		audio.play()
-		mainIframe.setAttribute('src', './main.php')
-		enterPage.style = 'display: none;'
-	})
-
-
+	});
 
 </script>
 

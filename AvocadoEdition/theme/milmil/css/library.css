@@ -1,0 +1,67 @@
+@import './common-layout.css';
+
+body {
+  background: black url('../img/library/bg-img.png') no-repeat center center fixed;
+  display: flex;
+  flex-direction: column;
+
+  --book-width: 235px;
+  --book-gap: 5px;
+  --left-offset: 240px;
+}
+
+body::before {
+  position: absolute;
+  content: ' ';
+  width: 100%;
+  height: 100%;
+  background: url('../img/library/frame.png') no-repeat center center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.container {
+  min-width: 1440px;
+  max-height: 1080px;
+  height: 100%;
+  position: relative;
+  margin: auto;
+  animation: fadeInUp 0.5s ease-out forwards;
+  z-index: 0;
+}
+
+.book {
+  position: absolute;
+  top: 187px;
+  width: var(--book-width);
+  height: 706px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 20px 20px 20px 0px rgba(0, 0, 0, 0.5);
+}
+
+.book a {
+  display: flex;
+  text-indent: -10000;
+}
+
+.book.notice {
+  left: var(--left-offset);
+  background-image: url('../img/library/notice.png');
+}
+
+.book.world {
+  left: calc(var(--left-offset) + var(--book-width) + var(--book-gap));
+  background-image: url('../img/library/world.png');
+}
+
+.book.system {
+  left: calc(var(--left-offset) + calc(var(--book-width) + var(--book-gap)) * 2);
+  background-image: url('../img/library/system.png');
+}
+
+.book.character {
+  left: calc(var(--left-offset) + calc(var(--book-width) + var(--book-gap)) * 3);
+  background-image: url('../img/library/character.png');
+}
