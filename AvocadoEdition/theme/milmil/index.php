@@ -28,20 +28,27 @@ if (!$is_member && !$config['cf_open']) {
 
 
 <script>
+	const audio = document.querySelector('#m-music-player')
+
 	// 기존에 있던 코드.. F5에 새로고침 
 	$(document.body).on("keydown", this, function (event) {
 		if (event.keyCode == 116) {
 			document.getElementById('main').contentDocument.location.reload(true);
+			audio.pause();
 			return false;
 		}
 	});
 
 	// 모던 브라우저 정책을 위해 클릭시 음악 재생
-	const audio = document.querySelector('#m-music-player')
 	window.addEventListener('message', function (event) {
 		if (event.data === 'playAudio') {
 			audio.play();
 		}
+	});
+
+	// 페이지를 나가거나 새로고침할 때 음악 멈추게 함
+	window.addEventListener('beforeunload', () => {
+		audio.pause();
 	});
 
 </script>

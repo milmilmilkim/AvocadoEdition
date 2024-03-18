@@ -1,17 +1,5 @@
 @charset "utf-8";
-/* -----------------------------------------------
-	* 사이트 전체 기본 스타일 정의
---------------------------------------------------
-	- 최초 작성일 :2021.08.15
-	- 최초 작성자 :아보카도
-	- 최종 수정일 :
-	- 최종 수정자 :
---------------------------------------------------*/
-
-
-/*********************************
-	기본 스타일
-**********************************/
+@import './common-layout.css';
 
 html,
 body {height:100%;}
@@ -227,31 +215,6 @@ html.single .bgm-player {display:none !important;}
 #header .fix-layout {padding:0;}
 #logo img {max-width:225px;}
 
-/** 모바일 헤더 레이아웃 */
-@media all and (max-width:1024px)  {
-	body {width:100%;}
-	#logo {padding:0; z-index:0; top:auto; left:auto; transform:translateX(0) translateY(0); position:relative; text-align:center;}
-	#body {margin-left:0px; padding-top:50px;}
-	
-	/* 헤더 위치 */
-	#header .fix-layout {padding:0;}
-	#header {position:fixed; top:0; left:0; right:0; bottom:auto; z-index:999; width:auto; height:50px; overflow:visible;}
-
-	/* 메인메뉴 */
-	#gnb {position:fixed; top:0; right:-280px; bottom:0; width:280px; z-index:999; overflow-y:auto;}
-	#gnb_control_box {position:absolute; top:50%; margin-top:-20px; right:10px; width:40px; height:40px; border-radius:100%; text-align:center;}
-	#gnb_control_box:before {content:""; display:inline-block; width:0; height:100%; vertical-align:middle;}
-	#gnb_control_box img {display:inline-block; max-width:50%; max-height:50%; vertical-align:middle; margin-left:-12%; opacity:1;}
-
-	/* 메뉴 열고 닫기 */
-	#gnb_control_box,
-	#gnb_control_box *  {transition:all 0s ease; -webkit-transition:all 0s ease; -ms-transition:all 0s ease;}
-
-	/* 메뉴 열렸을 시 */
-	.open-gnb #gnb {right:0;}
-	.open-gnb #gnb_control_box {position:fixed; top:0; left:0; right:0; bottom:0; z-index:99; background:rgba(0, 0, 0, 0.5); border-radius:0; width:auto; height:auto;}
-	.open-gnb #gnb_control_box img {opacity:0;}
-}
 
 
 /**************************************************************

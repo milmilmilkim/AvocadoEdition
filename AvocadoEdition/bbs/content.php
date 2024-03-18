@@ -1,9 +1,9 @@
 <?php
-include_once('./_common.php');
+include_once ('./_common.php');
 
 //dbconfig파일에 $g5['content_table'] 배열변수가 있는지 체크
-if( !isset($g5['content_table']) ){
-    die('<meta charset="utf-8">관리자 모드에서 게시판관리->내용 관리를 먼저 확인해 주세요.');
+if (!isset ($g5['content_table'])) {
+    die ('<meta charset="utf-8">관리자 모드에서 게시판관리->내용 관리를 먼저 확인해 주세요.');
 }
 
 // 내용
@@ -16,14 +16,14 @@ $g5['title'] = $co['co_subject'];
 
 
 if (is_include_path_check($co['co_include_head']))
-    @include_once($co['co_include_head']);
+    @include_once ($co['co_include_head']);
 else
-    include_once('./_head.php');
+    include_once ('./_head.php');
 
 if (G5_IS_MOBILE && $co['co_mobile_content'] != "") {
-	$str = conv_content($co['co_mobile_content'], $co['co_html'], $co['co_tag_filter_use']);
+    $str = conv_content($co['co_mobile_content'], $co['co_html'], $co['co_tag_filter_use']);
 } else {
-	$str = conv_content($co['co_content'], $co['co_html'], $co['co_tag_filter_use']);
+    $str = conv_content($co['co_content'], $co['co_html'], $co['co_tag_filter_use']);
 }
 
 // $src 를 $dst 로 변환
@@ -59,34 +59,35 @@ $dst[] = $default['de_admin_info_email'];
 $str = preg_replace($src, $dst, $str);
 
 // 스킨경로
-if(trim($co['co_skin']) == '')
+if (trim($co['co_skin']) == '')
     $co['co_skin'] = 'basic';
 
 $content_skin_path = get_skin_path('content', $co['co_skin']);
-$content_skin_url  = get_skin_url('content', $co['co_skin']);
-$skin_file = $content_skin_path.'/content.skin.php';
+$content_skin_url = get_skin_url('content', $co['co_skin']);
+$skin_file = $content_skin_path . '/content.skin.php';
 
 if ($is_admin)
-    echo '<div class="ctt_admin"><a href="'.G5_ADMIN_URL.'/contentform.php?w=u&amp;co_id='.$co_id.'" class="ui-btn admin">내용 수정</a></div>';
+    echo '<div class="ctt_admin"><a href="' . G5_ADMIN_URL . '/contentform.php?w=u&amp;co_id=' . $co_id . '" class="ui-btn admin">내용 수정</a></div>';
 ?>
 
 <?php
-if(is_file($skin_file)) {
-    $himg = G5_DATA_PATH.'/content/'.$co_id.'_h';
+
+if (is_file($skin_file)) {
+    $himg = G5_DATA_PATH . '/content/' . $co_id . '_h';
     if (file_exists($himg)) // 상단 이미지
-        echo '<div id="ctt_himg" class="ctt_img"><img src="'.G5_DATA_URL.'/content/'.$co_id.'_h" alt=""></div>';
+        echo '<div id="ctt_himg" class="ctt_img"><img src="' . G5_DATA_URL . '/content/' . $co_id . '_h" alt=""></div>';
 
-    include($skin_file);
+    include ($skin_file);
 
-    $timg = G5_DATA_PATH.'/content/'.$co_id.'_t';
+    $timg = G5_DATA_PATH . '/content/' . $co_id . '_t';
     if (file_exists($timg)) // 하단 이미지
-        echo '<div id="ctt_timg" class="ctt_img"><img src="'.G5_DATA_URL.'/content/'.$co_id.'_t" alt=""></div>';
+        echo '<div id="ctt_timg" class="ctt_img"><img src="' . G5_DATA_URL . '/content/' . $co_id . '_t" alt=""></div>';
 } else {
-    echo '<p>'.str_replace(G5_PATH.'/', '', $skin_file).'이 존재하지 않습니다.</p>';
+    echo '<p>' . str_replace(G5_PATH . '/', '', $skin_file) . '이 존재하지 않습니다.</p>';
 }
 
 if (is_include_path_check($co['co_include_tail']))
-    @include_once($co['co_include_tail']);
+    @include_once ($co['co_include_tail']);
 else
-    include_once('./_tail.php');
+    include_once ('./_tail.php');
 ?>
