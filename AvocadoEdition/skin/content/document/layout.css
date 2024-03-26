@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+body {
+  font-family: 'CustomFont', sans-serif;
+}
+
 html,
 body {
   width: 100%;
@@ -8,7 +12,10 @@ body {
   padding: 0;
 }
 body {
-  background: black url('./img/bg-img.png') no-repeat center center fixed;
+  background: black url('./img/bg-img.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   height: 100%;
 }
 
@@ -16,28 +23,156 @@ body {
   display: none;
 }
 
-#m-common-container,
-.m-content-container,
-.page {
+.m-content-container {
   height: 100%;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
 }
 
 .m-content-container {
   display: flex;
-  flex-direction: column;
   margin: auto;
   width: 840px;
 }
 
-.m-content-container nav {
-  padding: 5px;
+nav.content-category {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+nav.content-category a {
   color: #fff;
+  font-size: 16px;
+  display: block;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+aside {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+aside li {
+  display: block;
+  margin-bottom: 10px;
+}
+
+aside li:hover {
+  background: linear-gradient(to right, white, rgba(255, 255, 255, 0));
+}
+
+aside li::before {
+  content: '◆';
+  color: #fff;
+  position: absolute;
+}
+
+aside li a {
+  display: flex;
+  color: #fff;
+  font-size: 16px;
+  width: 100px;
+  margin-left: 18px;
+  padding: 2px 8px;
+}
+
+aside li a:hover {
+  color: #000;
+}
+aside li:hover::before {
+  color: #000;
 }
 
 .page {
-  background-color: white;
+  background: url('./img/bg-box.png');
+  background-size: cover;
+  background-repeat: no-repeat;
   width: 100%;
-  height: calc(100% - 50px);
+  height: 100%;
   overflow-y: auto;
+  position: relative;
+  padding: 0px 50px 80px 50px;
+  flex-direction: column;
+}
+
+.bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgb(0, 0, 0) 100%);
+}
+
+.page h1.m-content-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  flex-direction: column;
+  margin-bottom: 60px;
+  font-family: 'blackrose', sans-serif;
+}
+
+.page h1.m-content-title::before {
+  content: ' ';
+  width: 640px;
+  height: 80px;
+  position: relative;
+  background: url('./img/title-border.png') no-repeat;
+  background-position: center;
+  background-size: 100%;
+  margin-bottom: 10px;
+}
+
+// 대륙 관련
+
+.world-map-wrapper img {
+  width: 100%;
+  height: 100%;
+}
+
+.modal__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__container {
+  background-color: #fff;
+  max-width: 600px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.modal[aria-hidden='true'] {
+  display: none;
 }

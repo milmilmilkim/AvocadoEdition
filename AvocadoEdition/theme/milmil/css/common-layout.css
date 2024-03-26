@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'blackrose';
+  src: url('../img/210BlackroseLight.ttf') format('truetype');
+}
+
 html,
 body {
   margin: 0;
@@ -12,6 +17,10 @@ body {
 #m-common-container {
   min-width: 1440px;
   animation: fadeInUp 0.5s ease-out forwards; /* 애니메이션 적용 */
+}
+
+.m-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
 }
 
 @keyframes fadeInUp {

@@ -1,7 +1,10 @@
 @charset "utf-8";
 
 body {
-  background: black url('../img/bg-img.png') no-repeat center center fixed;
+  background: black url('../img/bg-img.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .banner-wrapper {

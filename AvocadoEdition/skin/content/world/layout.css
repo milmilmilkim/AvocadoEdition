@@ -1,0 +1,146 @@
+@charset "utf-8";
+
+body {
+  background: black;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+
+.ctt_admin {
+  display: none;
+}
+
+.m-content-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+}
+
+nav.content-category {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  position: fixed;
+  z-index: 3;
+}
+
+a.back {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 4;
+  color: #fff;
+  display: block;
+  margin: 20px;
+  font-size: 16px;
+}
+
+nav.content-category a {
+  color: #fff;
+  font-size: 16px;
+  display: block;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+aside {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+aside li {
+  display: block;
+  margin-bottom: 10px;
+}
+
+aside li:hover {
+  background: linear-gradient(to right, white, rgba(255, 255, 255, 0));
+}
+
+aside li::before {
+  content: '◆';
+  color: #fff;
+  position: absolute;
+}
+
+aside li a {
+  display: flex;
+  color: #fff;
+  font-size: 16px;
+  width: 100px;
+  margin-left: 18px;
+  padding: 2px 8px;
+}
+
+aside li a:hover {
+  color: #000;
+}
+aside li:hover::before {
+  color: #000;
+}
+
+.section {
+  background-color: black;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.inner {
+  width: 840px;
+  z-index: 4;
+}
+
+.section-2 {
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: url('./assets/2.png');
+}
+.bg-video {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+  background-color: black; /* in case the video doesn't fit the whole page*/
+  background-position: center center;
+  background-size: contain;
+  object-fit: cover; /*cover video background */
+  z-index: 3;
+}
