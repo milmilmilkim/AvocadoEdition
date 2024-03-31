@@ -55,9 +55,12 @@ for ($i = 0; $row = sql_fetch_array($result); $i++) {
     <div class="main-content-wrapper">
         <div class="left">
             <div class="content">
-                달력 컨텐츠
+                <iframe src="<?php echo G5_THEME_URL; ?>/cal.php" width="100%" height="307" frameborder="0"
+                    scrolling="no"></iframe>
             </div>
         </div>
+
+
 
         <div class="right">
             <div class="content">

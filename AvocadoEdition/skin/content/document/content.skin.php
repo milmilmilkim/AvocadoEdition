@@ -11,11 +11,20 @@ if (in_array($prefix, $validPrefixes)) {
     $sql = "SELECT * FROM {$g5['content_table']} WHERE co_id LIKE '{$prefix}_%'";
     $result = sql_query($sql);
     for ($i = 0; $row = sql_fetch_array($result); $i++) {
+        $himg_path = G5_DATA_PATH . '/content/' . $row['co_id'] . '_h';
+        if (file_exists($himg_path)) {
+            $row['himg_url'] = G5_DATA_URL . '/content/' . $row['co_id'] . '_h';
+        } else {
+            $row['himg_url'] = ''; // 이미지가 없을 경우 빈 값 할당
+        }
         $contents[$i] = $row;
     }
 }
 
 add_stylesheet('<link rel="stylesheet" href="' . $content_skin_url . '/layout.css">', 0);
+
+$himg = G5_DATA_PATH . '/content/' . $co_id . '_h';
+
 ?>
 
 <div id="m-common-container" style="height: 100%;">
@@ -68,6 +77,19 @@ add_stylesheet('<link rel="stylesheet" href="' . $content_skin_url . '/layout.cs
 <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
 
 <script>
+
+    const bgImg = <?php echo json_encode($co['himg_url']) ?>;
+
+    const setBgImage = (imgUrl) => {
+        let currentImg = imgUrl;
+        if (currentImg === '') {
+            currentImg = <?php echo json_encode(G5_SKIN_URL . '/content/document/img/bg-img.png') ?>;
+            console.log(currentImg)
+        }
+        document.body.style.backgroundImage = `url(${currentImg})`;
+    }
+
+
     // prefix가 일치하는 모든 게시글
     const contents = <?php echo json_encode($contents); ?>;
     // 현재 게시글 아이디
@@ -87,16 +109,19 @@ add_stylesheet('<link rel="stylesheet" href="' . $content_skin_url . '/layout.cs
         setContent(currentId)
     }))
 
+
     const getContent = (id) => {
         const content = contents.find((co) => co.co_id === currentId);
-        return ({ subject: content.co_subject, content: content.co_content })
-
+        return ({ subject: content.co_subject, content: content.co_content, bgImg: content.himg_url })
     }
 
+
+
     const setContent = (id) => {
-        const { subject, content } = getContent(id);
+        const { subject, content, bgImg } = getContent(id);
         titleEl.innerHTML = subject;
         articleEl.innerHTML = content;
+        setBgImage(bgImg);
 
         scrollToTop(document.querySelector('.page'))
         initWorldMap();
@@ -137,6 +162,8 @@ add_stylesheet('<link rel="stylesheet" href="' . $content_skin_url . '/layout.cs
 
     const initWorldMap = () => {
         const worldMapWrapper = document.querySelector(".world-map-wrapper");
+        if (!worldMapWrapper) return;
+
         worldMapWrapper.style.position = 'relative';
 
 

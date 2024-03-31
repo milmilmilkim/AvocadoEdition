@@ -2,8 +2,8 @@
 include_once ('./_common.php');
 
 //dbconfig파일에 $g5['content_table'] 배열변수가 있는지 체크
-if (!isset ($g5['content_table'])) {
-    die ('<meta charset="utf-8">관리자 모드에서 게시판관리->내용 관리를 먼저 확인해 주세요.');
+if (!isset($g5['content_table'])) {
+    die('<meta charset="utf-8">관리자 모드에서 게시판관리->내용 관리를 먼저 확인해 주세요.');
 }
 
 // 내용
@@ -12,7 +12,15 @@ $co = sql_fetch($sql);
 if (!$co['co_id'])
     alert('등록된 내용이 없습니다.');
 
+/** 상단 이미지를 추가 */
 $g5['title'] = $co['co_subject'];
+$himg_path = G5_DATA_PATH . '/content/' . $co_id . '_h';
+
+if (file_exists($himg_path)) {
+    $co['himg_url'] = G5_DATA_URL . '/content/' . $co_id . '_h';
+} else {
+    $co['himg_url'] = '';
+}
 
 
 if (is_include_path_check($co['co_include_head']))
