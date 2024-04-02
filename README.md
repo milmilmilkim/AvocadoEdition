@@ -11,10 +11,12 @@
 2. AvocadoEdition/theme/milmil
 3. AvocadoEdition/skin/content/document
 4. AvocadoEdition/skin/content/world
-   ———————————
-   세계관
-   https://github.com/milmilkim/avocado-skin/blob/2807db16258add61d047acf781c413f6895d62c4/AvocadoEdition/skin/content/world/_template.html
-   템플릿 맞게 작성!
+
+## 세계관(시놉시스)
+
+https://github.com/milmilkim/avocado-skin/blob/2807db16258add61d047acf781c413f6895d62c4/AvocadoEdition/skin/content/world/_template.html
+
+템플릿 맞게 작성!
 
 ---
 

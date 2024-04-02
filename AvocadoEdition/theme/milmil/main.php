@@ -78,13 +78,11 @@ for ($i = 0; $row = sql_fetch_array($result); $i++) {
     const swiper = new Swiper11('.swiper', {
         direction: 'vertical',
         loop: true,
+        speed: 1000,
         autoplay: {
             delay: 4000,
         },
         effect: 'fade',
-        fadeEffect: {
-            crossFade: true
-        },
 
     });
 </script>
