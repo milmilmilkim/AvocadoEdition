@@ -82,7 +82,7 @@ for ($i = 0; $row = sql_fetch_array($result); $i++) {
         autoplay: {
             delay: 4000,
         },
-        effect: 'fade',
+        // effect: 'fade',
 
     });
 </script>
