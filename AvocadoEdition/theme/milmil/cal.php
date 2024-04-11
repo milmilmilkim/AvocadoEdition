@@ -7,8 +7,6 @@ include_once (G5_LIB_PATH . '/latest.lib.php');
 
 <head>
     <style>
-        @charset "utf-8";
-
         /* 캘린더 */
         .cal-nav h2 {
             font-size: 12px;
@@ -189,5 +187,8 @@ include_once (G5_LIB_PATH . '/latest.lib.php');
 
 
 <div>
-    <?= latest('schedule2', 'cal', 31) ?>
+    <div id="main_image_box" class="theme-box">
+
+        <?= latest('schedule2', 'scd', 31) ?>
+    </div>
 </div>

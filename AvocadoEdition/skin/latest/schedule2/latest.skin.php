@@ -87,13 +87,11 @@ if ($month == "12")
 			<?php
 			$cday = 1;
 			$sel_mon = sprintf("%02d", $month);
-			$table_name = "avo_write_" . $bo_table;
-			$query = "SELECT * FROM $table_name WHERE wr_1!='' and left(wr_1,7) <= '{$year}-{$sel_mon}' and (wr_2='' or left(wr_2,7) >= '{$year}-{$sel_mon}') and wr_8='' and wr_option not like '%secret%' ORDER BY wr_1 , wr_id";
+			$table_name = $g5['write_prefix'] . $bo_table;
+			$query = "SELECT * FROM {$table_name} WHERE wr_1!='' and left(wr_1,6) <= '{$year}{$sel_mon}' and (wr_2='' or left(wr_2,6) >= '{$year}{$sel_mon}') and wr_8='' and wr_option not like '%secret%' ORDER BY wr_1 , wr_id";
 			$result = sql_query($query);
 			$j = 0; // layer id
 // 내용을 보여주는 부분
-			
-
 			while ($row = sql_fetch_array($result)) {  // 제목글 뽑아서 링크 문자열 만들기..
 				if (date('Ym', strtotime($row['wr_1'])) < $year . $sel_mon) {
 					$start_day = 1;
@@ -230,29 +228,29 @@ if ($month == "12")
 
 					// 기념일(양력) 표시
 					/*
-													 for($i=0 ; $i < sizeof($dayfile) ; $i++) {  // 파일 첫 행부터 끝행까지 루프
-														 $arrDay = explode("|", $dayfile[$i]);
-														 if($memday == $year.$arrDay[0]) {
-															 $daycont = $arrDay[1]; 
-															 $daycontcolor = $arrDay[2];
-															 if(substr($arrDay[2],0,3)=="red") $daycolor = "red"; // 공휴일은 날짜를 빨간색으로 표시
-														 }
-													 }
-													 */
+																				   for($i=0 ; $i < sizeof($dayfile) ; $i++) {  // 파일 첫 행부터 끝행까지 루프
+																					   $arrDay = explode("|", $dayfile[$i]);
+																					   if($memday == $year.$arrDay[0]) {
+																						   $daycont = $arrDay[1]; 
+																						   $daycontcolor = $arrDay[2];
+																						   if(substr($arrDay[2],0,3)=="red") $daycolor = "red"; // 공휴일은 날짜를 빨간색으로 표시
+																					   }
+																				   }
+																				   */
 					/*
-													 // 석봉운님의 음력날짜 변수선언
-													 $myarray = soltolun($year,$month,$cday);
-													 if ($myarray[day]==1 || $myarray[day]==11 || $myarray[day]==21) {
-													   $moonday ="<font color='gray'>&nbsp;(음)$myarray[month].$myarray[day]$myarray[leap]</font>";
-													 } else {
-													   $moonday="";
-													 }
-													 
-													 include($file_index."/lunar.txt"); ### 음력 기념일 파일 지정
+																				   // 석봉운님의 음력날짜 변수선언
+																				   $myarray = soltolun($year,$month,$cday);
+																				   if ($myarray[day]==1 || $myarray[day]==11 || $myarray[day]==21) {
+																					 $moonday ="<font color='gray'>&nbsp;(음)$myarray[month].$myarray[day]$myarray[leap]</font>";
+																				   } else {
+																					 $moonday="";
+																				   }
+																				   
+																				   include($file_index."/lunar.txt"); ### 음력 기념일 파일 지정
 
-													 if ($annivmoonday&&$daycont) $blank="<br />"; // 음력절기와 양력기념일이 동시에 있으면 한칸 띔
-													 else $blank="";
-													 */
+																				   if ($annivmoonday&&$daycont) $blank="<br />"; // 음력절기와 양력기념일이 동시에 있으면 한칸 띔
+																				   else $blank="";
+																				   */
 					echo "<i>" . $daytext . "</i>";
 					echo $html_day[$cday];
 
@@ -271,11 +269,3 @@ if ($month == "12")
 		</tbody>
 	</table>
 </div>
-
-
-<script type="text/javascript">
-	// PHP 배열을 JavaScript로 변환
-	var resultsData = <?php echo json_encode($result); ?>;
-	// 콘솔에 결과 배열 로그
-	console.log(resultsData);
-</script>
