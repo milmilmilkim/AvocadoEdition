@@ -1,0 +1,253 @@
+@charset "utf-8";
+
+/***************************************************************
+	Design Manager Setting Style: 자동생성 CSS
+---------------------------------------------------------------
+	- 최종 수정일 : 2024-09-27 17:25:00 
+	- 모바일 사이즈 기준 (공통) : 1024px
+***************************************************************/
+
+ 
+
+
+/**************************************************************
+	기본 레이아웃
+***************************************************************/
+
+.fix-layout { max-width:1160px; }
+@media all and (max-width:1160px) {
+	.fix-layout { max-width:1040px; }
+	#body > .fix-layout > .mid-layout {padding-left:20px; padding-right:20px;}
+}
+
+
+/**************************************************************
+	기본 폰트 설정
+***************************************************************/
+
+* {}
+body { }
+.txt-default { }
+a, .txt-point, .sch_word { }
+
+.txt-menu-font {}
+
+
+/**************************************************************
+	사이트 배경 설정
+***************************************************************/
+
+.enterWrapper { }
+.enterWrapper .guide { }
+
+
+@media all and (min-width: 1025px) { 
+	.admin-preview-box,
+	html.single:before { }
+}
+
+@media all and (max-width: 1024px) {
+	.admin-preview-box,
+	html.single:before { }
+}
+
+
+/**************************************************************
+	메뉴 스타일 설정
+***************************************************************/
+
+/* 관리자 미리보기 스타일 정의 */
+.admin-preview-box .gnbWrap { }
+.admin-preview-box .gnbWrap .tooltips { }
+
+#topCont a .icons,
+.icons-link-box .icons,
+.admin-preview-box .gnbWrap .icons { }
+
+#topCont a .icons:before,
+.icons-link-box a .icons:before,
+.admin-preview-box .gnbWrap .icons:before { }
+.admin-preview-box .gnbWrap .tooltips { }
+
+/* 사용자단 스타일 정의 */
+#header .gnbWrap,
+#mo_header .gnbWrap { }
+#header .gnbWrap .tooltips,
+#mo_header .gnbWrap .tooltips { }
+
+@media all and (min-width: 1025px) { 
+	#header { top:0; bottom:0; left:20px; }
+	#header .gnbWrap { top:50%; left:0; transform:translateY(-50%); -webkit-transform:translateY(-50%); }
+	#header .gnbWrap li {  }
+	#header .gnbWrap li.line { display:block; position:relative; height:.5em; }
+	#header .gnbWrap .tooltips { margin-left:.5em; left:80%; top:50%; transform:translateY(-50%); -webkit-transform:translateY(-50%); }
+	#header .gnbWrap a:hover .tooltips { left:100%; }
+	
+	#header .gnbWrap .icons { }
+	#header .gnbWrap .icons:before { }
+	#header .gnbWrap .tooltips { }
+}
+@media all and (max-width: 1024px) {
+	#mo_header { }
+	#mo_header .gnbWrap a { }
+	#mo_header .gnbWrap li.line { }
+	body.open-gnb .control-mobile-menu { }
+}
+
+
+
+/**************************************************************
+	스크롤 / 마우스 드래그 블록 색상 지정
+***************************************************************/
+
+*::-webkit-scrollbar { }
+*::-webkit-scrollbar-track { }
+*::-webkit-scrollbar-thumb { }
+
+* { }
+
+::selection { }
+::-moz-selection { }
+::-webkit-selection { }
+
+
+/**************************************************************
+	버튼 색상 지정
+***************************************************************/
+
+.ui-btn { }
+.ui-btn:hover { }
+.ui-btn.point { }
+.ui-btn.point:hover { }
+.ui-btn.etc { }
+.ui-btn.etc:hover { }
+
+a.ui-btn { }
+.ui-btn.small { }
+a.ui-btn.small { }
+.ui-btn.big { }
+a.ui-btn.big { }
+
+
+/**************************************************************
+	검색박스 영역
+***************************************************************/
+
+#bo_sch { }
+#bo_sch button { }
+
+
+/**************************************************************
+	글 상세보기 영역
+***************************************************************/
+
+#bo_list,
+#bo_w,
+#bo_v { }
+
+#bo_v .board-title,
+#bo_v .board-info,
+#bo_v #bo_vc,
+#bo_v #bo_v_bot { }
+#bo_v .board-title,
+#bo_v .board-info { }
+#bo_v #bo_vc,
+#bo_v #bo_v_bot { }
+
+#bo_v .board-title > * { }
+#bo_v #bo_vc .is-reply { }
+
+
+
+/**************************************************************
+	페이징 스타일 설정
+***************************************************************/
+
+.pg_wrap { }
+.pg_wrap .pg_page { }
+.pg_wrap .pg_page:hover { }
+.pg_wrap .pg_control { }
+.pg_wrap .pg_current { }
+
+
+/**************************************************************
+	구분선 설정
+***************************************************************/
+
+hr.line	{ }
+
+
+/**************************************************************
+	인풋 타입
+***************************************************************/
+
+.form-input,
+input[type="file"],
+input[type="text"],
+input[type="number"],
+input[type="password"],
+select { }
+
+.form-input,
+input[type="file"],
+input[type="text"],
+input[type="number"],
+input[type="password"],
+textarea,
+select { }
+
+*::placeholder { }
+
+
+/**************************************************************
+	기본박스 설정
+***************************************************************/
+
+.theme-box { }
+
+.board-notice-box { }
+
+
+/**************************************************************
+	테이블 설정
+***************************************************************/
+
+.theme-list thead th { }
+.theme-list tbody th,
+.theme-list tbody td { }
+
+.theme-form tbody th { }
+.theme-form tbody td { }
+
+
+
+
+/**************************************************************
+	로드비 게시판 설정
+***************************************************************/
+
+#load_log_board { }
+
+#log_list { }
+
+#log_list .item { }
+
+#log_list .item .item-inner .ui-pic { }
+
+#log_list .item .item-inner .item-comment { }
+
+#log_list .item .item-inner .ui-comment { }
+
+#log_list .item .item-inner .co-header p,
+#log_list .item .item-inner .co-header p a { }
+
+#log_list .item .item-inner .co-header p.owner,
+#log_list .item .item-inner .co-header p.owner a { }
+
+#log_list .item .item-inner .co-footer .date { }
+
+#log_list .item .item-inner .co-content .other-site-link { }
+
+#log_list .item .item-inner .co-content .link_hash_tag { }
+
+#log_list .item .item-inner .co-content .log_link_tag { }
