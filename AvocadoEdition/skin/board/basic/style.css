@@ -1,4 +1,41 @@
 @charset "utf-8";
 
+th.no {
+	width: 50px;
+}
 
+th.title {
+	width: 300px;
+}
+
+table.my-table {
+	width: 350px;
+}
+
+
+@media all and (max-width:770px) {
+	.responsive-table-box > .guide {display:none !important; }
+	table.my-table {
+		width: 100% !important;
+	}
+}
+
+.bo_fx {
+	text-align: left !important;
+}
+
+#body > .fix-layout > .mid-layout {padding-top:100px!important; vertical-align: top !important;}
+
+.board-title {
+	display: none !important;
+}
+
+#bo_v, #bo_v_con {
+	padding-top: 0 !important;
+	margin-top: 0 !important;
+}
+
+.board-content {
+	padding-top: 0 !important;
+}
 

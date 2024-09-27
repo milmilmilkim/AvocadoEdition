@@ -44,22 +44,12 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 	<div class="responsive-table-box">
 		<p class="guide">Scroll →</p>
 		<div class="resp-table">
-			<table class="theme-list">
+			<table class="theme-list my-table">
 				<caption><?php echo $board['bo_subject'] ?> 목록</caption>
-				<colgroup>
-					<col style="width: 80px;" />
-					<col />
-					<col style="width: 120px;" />
-					<col style="width: 120px;" />
-					<col style="width: 100px;" />
-				</colgroup>
 				<thead>
 				<tr>
-					<th scope="col">No</th>
-					<th scope="col">제목</th>
-					<th scope="col">작성자</th>
-					<th scope="col">작성일</th>
-					<th scope="col">조회</th>
+					<th scope="col" class="no">No</th>
+					<th scope="col" class="title">제목</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -93,9 +83,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 								if (isset($list[$i]['icon_secret'])) echo $list[$i]['icon_secret'];
 							?>
 						</td>
-						<td class="txt-center"><?php echo $list[$i]['wr_name'] ?></td>
-						<td class="txt-center"><?php echo $list[$i]['datetime2'] ?></td>
-						<td class="txt-center"><?php echo $list[$i]['wr_hit'] ?></td>
 					</tr>
 				<? } ?>
 				<? if (count($list) == 0) { echo '<tr><td colspan="'.$colspan.'" class="empty_table">게시물이 없습니다.</td></tr>'; } ?>

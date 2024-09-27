@@ -162,7 +162,7 @@ th, td {border:none;}
 
 .theme-list {table-layout:fixed;}
 .theme-list thead th {height:30px;}
-.theme-list td {padding:5px; height:30px;}
+.theme-list td {padding:5px 10px; height:30px;}
 .theme-list td.no-data {padding:5px; text-align:center; line-height:200px;}
 
 .responsive-table-box {display:block; position:relative;}
@@ -170,9 +170,9 @@ th, td {border:none;}
 .responsive-table-box > .guide {display:none; text-align:right; font-size:12px;}
 
 @media all and (max-width:770px) {
-	.responsive-table-box > .guide {display:block;}
+	/* .responsive-table-box > .guide {display:block;}
 	.responsive-table-box > .resp-table {overflow:auto;}
-	.responsive-table-box > .resp-table > table {width:770px !important;}
+	.responsive-table-box > .resp-table > table {width:770px !important;} */
 }
 
 

@@ -1,0 +1,258 @@
+@charset "utf-8";
+
+/***************************************************************
+	Design Manager Setting Style: 자동생성 CSS
+---------------------------------------------------------------
+	- 최종 수정일 : 2024-02-16 13:07:46 
+	- 모바일 사이즈 기준 (공통) : 1024px
+***************************************************************/
+
+@font-face {
+    font-family: 'KCC-eunyoung';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KCC-eunyoung-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+} 
+
+
+/**************************************************************
+	기본 레이아웃
+***************************************************************/
+
+.fix-layout { max-width:1760px; }
+@media all and (max-width:1760px) {
+	.fix-layout { max-width:1640px; }
+	#body > .fix-layout > .mid-layout {padding-left:20px; padding-right:20px;}
+}
+
+
+/**************************************************************
+	기본 폰트 설정
+***************************************************************/
+
+* {font-family:'S-CoreDream-3Light', sans-serif; }
+body { color:rgb(119,119,119); font-size:13px; font-family:'S-CoreDream-3Light', sans-serif; }
+.txt-default { color:rgb(0,78,34); }
+a, .txt-point, .sch_word { color:rgb(0,78,34); }
+
+.txt-menu-font {font-family:'PyeongChangPeace-Light', sans-serif; }
+
+
+/**************************************************************
+	사이트 배경 설정
+***************************************************************/
+
+.enterWrapper { background-color:rgba(0,78,34,0.1); }
+.enterWrapper .guide { color:rgb(66,66,66); font-size:17px; font-family:'PyeongChangPeace-Light', sans-serif; }
+
+
+@media all and (min-width: 1025px) { 
+	.admin-preview-box,
+	html.single:before { background-color:rgb(255,255,255); }
+}
+
+@media all and (max-width: 1024px) {
+	.admin-preview-box,
+	html.single:before { background-color:rgb(255,255,255); }
+}
+
+
+/**************************************************************
+	메뉴 스타일 설정
+***************************************************************/
+
+/* 관리자 미리보기 스타일 정의 */
+.admin-preview-box .gnbWrap { font-size:15px; }
+.admin-preview-box .gnbWrap .tooltips { font-family:'PyeongChangPeace-Light', sans-serif; }
+
+#topCont a .icons,
+.icons-link-box .icons,
+.admin-preview-box .gnbWrap .icons { color:rgb(0,78,34); height:3.3em; }
+
+#topCont a .icons:before,
+.icons-link-box a .icons:before,
+.admin-preview-box .gnbWrap .icons:before { top:50%; left:50%; right:auto; bottom:auto; width:2.1em; height:2.1em; margin:-1.05em 0 0 -1.05em; transform:rotate(-45deg); -webkit-transform:rotate(-45deg); background-color:rgba(255,255,255,0.4); border-color:rgb(0,78,34); border-style:solid; border-width:1px; }
+.admin-preview-box .gnbWrap .tooltips { background-color:rgba(0,78,34,0.5); color:rgb(255,255,255); font-size:12px; }
+
+/* 사용자단 스타일 정의 */
+#header .gnbWrap,
+#mo_header .gnbWrap { font-size:15px; }
+#header .gnbWrap .tooltips,
+#mo_header .gnbWrap .tooltips { font-family:'PyeongChangPeace-Light', sans-serif; }
+
+@media all and (min-width: 1025px) { 
+	#header { top:0; bottom:0; left:20px; }
+	#header .gnbWrap { top:50%; left:0; transform:translateY(-50%); -webkit-transform:translateY(-50%); }
+	#header .gnbWrap li {  }
+	#header .gnbWrap li.line { display:block; position:relative; height:.5em; }
+	#header .gnbWrap .tooltips { margin-left:.5em; left:80%; top:50%; transform:translateY(-50%); -webkit-transform:translateY(-50%); }
+	#header .gnbWrap a:hover .tooltips { left:100%; }
+	
+	#header .gnbWrap .icons { color:rgb(0,78,34); height:3.3em; }
+	#header .gnbWrap .icons:before { top:50%; left:50%; right:auto; bottom:auto; width:2.1em; height:2.1em; margin:-1.05em 0 0 -1.05em; transform:rotate(-45deg); -webkit-transform:rotate(-45deg); background-color:rgba(255,255,255,0.4); border-color:rgb(0,78,34); border-style:solid; border-width:1px; }
+	#header .gnbWrap .tooltips { background-color:rgba(0,78,34,0.5); color:rgb(255,255,255); font-size:12px; }
+}
+@media all and (max-width: 1024px) {
+	#mo_header { background-color:rgba(0,78,34,0.5); color:rgb(255,255,255); }
+	#mo_header .gnbWrap a { color:rgb(255,255,255); }
+	#mo_header .gnbWrap li.line { background-color:rgb(255,255,255); }
+	body.open-gnb .control-mobile-menu { color:rgb(255,255,255); }
+}
+
+
+
+/**************************************************************
+	스크롤 / 마우스 드래그 블록 색상 지정
+***************************************************************/
+
+*::-webkit-scrollbar { width:5px; height:5px; }
+*::-webkit-scrollbar-track { background-color:rgb(255,255,255); }
+*::-webkit-scrollbar-thumb { background-color:rgb(0,78,34); }
+
+* { outline-color:rgb(0,78,34); }
+
+::selection { background:rgb(0,78,34); color:rgb(255,255,255); }
+::-moz-selection { background:rgb(0,78,34); color:rgb(255,255,255); }
+::-webkit-selection { background:rgb(0,78,34); color:rgb(255,255,255); }
+
+
+/**************************************************************
+	버튼 색상 지정
+***************************************************************/
+
+.ui-btn { height:30px; font-size:13px; background-color:rgb(0,78,34); color:rgb(255,255,255); border-color:rgb(0,78,34); }
+.ui-btn:hover { background-color:rgb(0,78,34); color:rgb(255,255,255); border-color:rgb(0,78,34); }
+.ui-btn.point { background-color:rgb(0,78,34); color:rgb(255,255,255); border-color:rgb(0,78,34); }
+.ui-btn.point:hover { background-color:rgb(0,78,34); color:rgb(255,255,255); border-color:rgb(0,78,34); }
+.ui-btn.etc { background-color:rgb(234,234,234); color:rgb(119,119,119); border-color:rgb(222,222,222); }
+.ui-btn.etc:hover { background-color:rgb(222,222,222); color:rgb(119,119,119); border-color:rgb(202,202,202); }
+
+a.ui-btn { line-height:28px; }
+.ui-btn.small { height:20px; }
+a.ui-btn.small { line-height:20px; }
+.ui-btn.big { font-size:16px; height:40px; }
+a.ui-btn.big { line-height:38px; }
+
+
+/**************************************************************
+	검색박스 영역
+***************************************************************/
+
+#bo_sch { margin-top:30px; }
+#bo_sch button { width:30px; height:30px; font-size:15px; }
+
+
+/**************************************************************
+	글 상세보기 영역
+***************************************************************/
+
+#bo_list,
+#bo_w,
+#bo_v { }
+
+#bo_v .board-title,
+#bo_v .board-info,
+#bo_v #bo_vc,
+#bo_v #bo_v_bot { border-color:rgb(255,255,255); }
+#bo_v .board-title,
+#bo_v .board-info { }
+#bo_v #bo_vc,
+#bo_v #bo_v_bot { }
+
+#bo_v .board-title > * { color:rgb(0,78,34); }
+#bo_v #bo_vc .is-reply { border-color:rgb(255,255,255); }
+
+
+
+/**************************************************************
+	페이징 스타일 설정
+***************************************************************/
+
+.pg_wrap { font-size:13px; }
+.pg_wrap .pg_page { color:rgb(119,119,119); }
+.pg_wrap .pg_page:hover { color:rgb(0,78,34); }
+.pg_wrap .pg_control { color:rgb(0,78,34); }
+.pg_wrap .pg_current { color:rgb(0,78,34); }
+
+
+/**************************************************************
+	구분선 설정
+***************************************************************/
+
+hr.line	{ background:rgb(119,119,119); }
+
+
+/**************************************************************
+	인풋 타입
+***************************************************************/
+
+.form-input,
+input[type="file"],
+input[type="text"],
+input[type="number"],
+input[type="password"],
+select { height:30px; }
+
+.form-input,
+input[type="file"],
+input[type="text"],
+input[type="number"],
+input[type="password"],
+textarea,
+select { background-color:rgba(255,255,255,0.8); border-color:rgb(0,78,34); color:rgb(119,119,119); font-size:13px; }
+
+*::placeholder { color:rgba(119,119,119,0.5); }
+
+
+/**************************************************************
+	기본박스 설정
+***************************************************************/
+
+.theme-box { color:rgb(119,119,119); border-top-width:2px; border-bottom-width:2px; border-left-width:2px; border-right-width:2px; }
+
+.board-notice-box { background-color:rgba(255,255,255,0.2); color:rgb(255,255,255); border-color:rgb(255,255,255); border-top-width:1px; border-bottom-width:1px; border-left-width:1px; border-right-width:1px; }
+
+
+/**************************************************************
+	테이블 설정
+***************************************************************/
+
+.theme-list thead th { background-color:rgb(255,255,255); color:rgb(119,119,119); border-color:rgba(119,119,119,0.5); border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px; border-left-style:solid; border-left-width:1px; border-right-style:solid; border-right-width:1px; }
+.theme-list tbody th,
+.theme-list tbody td { background-color:rgba(255,255,255,0.5); color:rgb(119,119,119); border-color:rgba(119,119,119,0.5); border-top-style:solid; border-top-width:1px; border-bottom-style:solid; border-bottom-width:1px; border-left-style:solid; border-left-width:1px; border-right-style:solid; border-right-width:1px; }
+
+.theme-form tbody th { background-color:rgb(255,255,255); color:rgb(119,119,119); border-color:rgba(255,255,255,0.5); }
+.theme-form tbody td { background-color:rgba(255,255,255,0.5); color:rgb(119,119,119); border-color:rgb(255,255,255); }
+
+
+
+
+/**************************************************************
+	로드비 게시판 설정
+***************************************************************/
+
+#load_log_board { background-color:rgba(255,255,255,0.6); }
+
+#log_list { }
+
+#log_list .item { margin-bottom:40px; }
+
+#log_list .item .item-inner .ui-pic { color:rgb(119,119,119); }
+
+#log_list .item .item-inner .item-comment { background-color:rgba(255,255,255,0); color:rgb(119,119,119); border-color:rgb(0,78,34); border-top-width:1px; border-bottom-width:1px; margin-bottom:10px; }
+
+#log_list .item .item-inner .ui-comment { background-color:rgb(239,239,239); }
+
+#log_list .item .item-inner .co-header p,
+#log_list .item .item-inner .co-header p a { color:rgb(0,78,34); font-size:14px; }
+
+#log_list .item .item-inner .co-header p.owner,
+#log_list .item .item-inner .co-header p.owner a { color:rgb(0,78,34); font-size:14px; }
+
+#log_list .item .item-inner .co-footer .date { color:rgb(199,199,199); font-size:11px; }
+
+#log_list .item .item-inner .co-content .other-site-link { color:rgb(0,78,34); }
+
+#log_list .item .item-inner .co-content .link_hash_tag { color:rgb(0,78,34); }
+
+#log_list .item .item-inner .co-content .log_link_tag { color:rgb(0,78,34); }

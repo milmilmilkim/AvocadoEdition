@@ -20,15 +20,19 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 	<div class="board-title">
 		<?php
 			if ($category_name) echo "<em>{$view['ca_name']}</em>"; // 분류 출력 끝
-			echo "<strong>".cut_str(get_text($view['wr_subject']), 70)."</strong>"; // 글제목 출력
+
+
+
+
+
 		?>
 	</div>
 
-	<div class="board-info">
+	<!-- <div class="board-info">
 		<strong><?php echo $view['name'] ?><?php if ($is_ip_view) { echo "&nbsp;($ip)"; } ?></strong>
 		<strong><?php echo date("y-m-d H:i", strtotime($view['wr_datetime'])) ?></strong>
 		<strong><?php echo number_format($view['wr_hit']) ?></strong>
-	</div>
+	</div> -->
 
 	<?php
 	if ($view['file']['count']) {

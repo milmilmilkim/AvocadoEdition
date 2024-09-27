@@ -74,7 +74,7 @@ $owner_behind = $owner_behind['cs_etc_4'];
 			<div class="ui-search-box">
 				<fieldset class="sch_category select-box">
 					<select name="sfl" id="sfl">
-						<option value="wr_content"<?php echo get_selected($sfl, 'wr_content'); ?>>코멘트</option>
+						<option value="wr_content"<?php echo get_selected($sfl, 'wr_content'); ?>>코멘트?</option>
 						<option value="hash"<?php echo get_selected($sfl, 'hash'); ?>>해시</option>
 						<option value="log"<?php echo get_selected($sfl, 'log'); ?>>번호</option>
 					</select>
