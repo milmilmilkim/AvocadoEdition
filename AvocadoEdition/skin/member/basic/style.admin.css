@@ -23,7 +23,7 @@ html, body	{ position: relative; height: 100%; background: #fff; }
 	right: 0;
 	height: 50%;
 	box-sizing: border-box;
-	border-top: 8px solid #29c7ca;
+	border-top: 8px solid #ecc6c6;
 	background: url('./img/bak_admin_login_top_pattern.png');
 	z-index: 0;
 }
@@ -71,7 +71,7 @@ html, body	{ position: relative; height: 100%; background: #fff; }
 
 #login_title em	{
 	font-style: normal;
-	color: #29c7ca;
+	color: #ecc6c6;
 	text-align: center;
 	line-height: 1.5em;
 }
@@ -103,7 +103,7 @@ html, body	{ position: relative; height: 100%; background: #fff; }
 	width: 500px;
 	height: 260px;
 
-	border-top: 5px solid #29c7ca;
+	border-top: 5px solid #ecc6c6;
 
 	transform: translateX(-50%) translateY(-50%);
 	background: #fff;
@@ -154,7 +154,7 @@ html, body	{ position: relative; height: 100%; background: #fff; }
 	outline: none;
 	border: 1px solid #eaeaea;
 }
-#mb_login fieldset.input input:focus	{ border: 2px solid #29c7ca; }
+#mb_login fieldset.input input:focus	{ border: 2px solid #ecc6c6; }
 
 #mb_login fieldset.input label	{
 	display: block;
@@ -181,7 +181,7 @@ html, body	{ position: relative; height: 100%; background: #fff; }
 	font-size: 16px;
 	color: #ccc;
 }
-#mb_login fieldset.input input:focus + label:before	{ color: #29c7ca; }
+#mb_login fieldset.input input:focus + label:before	{ color: #ecc6c6; }
 #mb_login fieldset.input label.login_id:before	{ content: "\e976"; }
 #mb_login fieldset.input label.login_pw:before	{ content: "\e98e"; }
 
@@ -215,7 +215,7 @@ html, body	{ position: relative; height: 100%; background: #fff; }
 	display: block;
 	width: 100%;
 	height: 100%;
-	background: #29c7ca;
+	background: #ecc6c6;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 18px;
 	border: none;

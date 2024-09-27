@@ -96,27 +96,27 @@ $download_point = 0;
 
 //-------------------------------------------------------------------------------------------------
 // config 테이블 설정
+
 $sql = " insert into `{$table_prefix}config`
             set cf_title = '".G5_VERSION."',
-                cf_theme = '',
                 cf_admin = '$admin_id',
                 cf_admin_email = '$admin_email',
                 cf_admin_email_name = '".G5_VERSION."',
-                cf_use_point = '1',
-                cf_use_copy_log = '1',
+                cf_use_point = '0',
+                cf_use_copy_log = '0',
                 cf_login_point = '0',
                 cf_memo_send_point = '0',
                 cf_cut_name = '15',
                 cf_nick_modify = '0',
                 cf_new_skin = 'basic',
-                cf_new_rows = '15',
+                cf_new_rows = '10',
                 cf_search_skin = 'basic',
                 cf_connect_skin = 'basic',
                 cf_read_point = '$read_point',
                 cf_write_point = '$write_point',
                 cf_comment_point = '$comment_point',
                 cf_download_point = '$download_point',
-                cf_write_pages = '10',
+                cf_write_pages = '5',
                 cf_mobile_pages = '5',
                 cf_link_target = '_blank',
                 cf_delay_sec = '30',
@@ -157,19 +157,9 @@ $sql = " insert into `{$table_prefix}config`
                 cf_page_rows = '15',
                 cf_mobile_page_rows = '15',
                 cf_cert_limit = '2',
-                cf_stipulation = '해당 커뮤니티에 맞는 커뮤니티 활동 규칙을 입력합니다. 회원 가입시 오너 동의 사항으로 출력됩니다.',
-                cf_privacy = '해당 커뮤니티에 맞는 캐릭터 생성 유의사항을 입력합니다. 회원 가입시 오너 동의 사항으로 출력됩니다.',
-				cf_side_title = '소속',
-				cf_class_title = '종족',
-				cf_character_count = '1',
-				cf_search_count = '5',
-				cf_money = '화폐',
-				cf_money_pice = '원',
-				cf_exp_name = '경험치',
-				cf_exp_pice = 'exp',
-				cf_rank_name = '랭킹',
-				cf_shop_category = '일반||이벤트',
-				cf_item_category = '일반||프로필수정||아이템추가||스탯회복'
+                cf_stipulation = '',
+                cf_privacy = '',
+				cf_add_fonts = '@font-face {\r\n    font-family: \'PyeongChangPeace-Light\';\r\n    src: url(\'https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Light.woff2\') format(\'woff2\');\r\n    font-weight: 300;\r\n    font-style: normal;\r\n}\r\n@font-face {\r\n     font-family: \'S-CoreDream-3Light\';\r\n     src: url(\'https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff\') format(\'woff\');\r\n     font-weight: normal;\r\n     font-style: normal;\r\n}'
                 ";
 sql_query($sql, true, $dblink);
 
@@ -221,51 +211,51 @@ function g5_path_temp()
 	$result['url'] = str_replace("/install", "", $result['url']);
     return $result;
 }
+
 $g5_path = g5_path_temp();
-$sql = " INSERT INTO `{$table_prefix}css_config` (`cs_id`, `cs_name`, `cs_value`, `cs_descript`, `cs_etc_1`, `cs_etc_2`, `cs_etc_3`, `cs_etc_4`, `cs_etc_5`, `cs_etc_6`, `cs_etc_7`, `cs_etc_8`, `cs_etc_9`, `cs_etc_10`) VALUES
-		(1, 'logo', '".$g5_path['url']."/adm/img/logo.png', '', '', '', '', '', '', '', '', '', '', ''),
-		(2, 'm_logo', '".$g5_path['url']."/adm/img/logo.png', '', '', '', '', '', '', '', '', '', '', ''),
-		(3, 'background', '".$g5_path['url']."/skin/member/basic/img/bak_admin_login_top_pattern.png', '', '', '', '', '', '', '', '', '', '', ''),
-		(4, 'm_background', '".$g5_path['url']."/skin/member/basic/img/bak_admin_login_top_pattern.png', '', '', '', '', '', '', '', '', '', '', ''),
-		(5, 'menu_pos', 'left', '', '', '', '', '', '', '', '', '', '', ''),
-		(6, 'menu_width', '200', '', '', '', '', '', '', '', '', '', '', ''),
-		(7, 'menu_height', '50', '', '', '', '', '', '', '', '', '', '', ''),
-		(8, 'menu_background', '', '', '', '', '', '', '', '', '', '', '', ''),
-		(9, 'm_menu_background', '', 'rgba(0, 0, 0, .5)', '', '', '', '', '', '', '', '', '', ''),
-		(10, 'btn_default', '#ffffff', '', '#000000', '#000000', '#ffffff', '#222222', '#000000', '', '', '', '', ''),
-		(11, 'btn_point', '#ffffff', '', '#29c7c9', '#29c7c9', '#ffffff', '#29c7c9', '#29c7c9', '', '', '', '', ''),
-		(12, 'btn_etc', '#ffffff', '', '#555555', '#333333', '#ffffff', '#555555', '#333333', '', '', '', '', ''),
-		(13, 'mmb_contain_bak', '', '', '', '', '', '', '', '', '', '', '', ''),
-		(14, 'mmb_notice', 'rgba(0, 0, 0, .5)', '', '#ffffff', '', '', '', '', '', '', '', '', ''),
-		(15, 'mmb_list', '', '', '', '', '', '', '', '', '', '', '', ''),
-		(16, 'mmb_list_item', '', '', '', '', '', '', '', '', '', '', '', ''),
-		(17, 'mmb_log', '', '', '', '', '', '', '', '', '', '', '', ''),
-		(18, 'mmb_reply', '', '', '', '', '', '', '', '', '', '', '', ''),
-		(19, 'mmb_reply_item', 'rgba(0, 0, 0, .5)', '', '#eaeaea', '', '', '', '', '10', '', '', '', ''),
-		(20, 'mmb_name', '#eeeeee', '', '12', '', '', '', '', '', '', '', '', ''),
-		(21, 'mmb_owner_name', '#29c7c9', '', '12', '▶', '◀', '', '', '', '', '', '', ''),
-		(22, 'mmb_datetime', '#bbbbbb', '', '11', '', '', '', '', '', '', '', '', ''),
-		(23, 'mmb_link', '#29c7c9', '', '', '', '', '', '', '', '', '', '', ''),
-		(24, 'mmb_call', '#29c7c9', '', '', '', '', '', '', '', '', '', '', ''),
-		(25, 'mmb_log_ank', '#29c7c9', '', '', '', '', '', '', '', '', '', '', ''),
-		(26, 'mmb_hash', '#29c7c9', '', '', '', '', '', '', '', '', '', '', ''),
-		(27, 'color_default', '#ffffff', '', '', '', '', '', '', '', '', '', '', ''),
-		(28, 'color_bak', '#333333', '', '', '', '', '', '', '', '', '', '', ''),
-		(29, 'color_point', '#29c7c9', '', '', '', '', '', '', '', '', '', '', ''),
-		(30, 'input_bak', '#000000', '', '#eeeeee', '#222222', '', '', '', '', '', '', '', ''),
-		(31, 'box_style', 'rgba(0, 0, 0, .5)', '', '#eeeeee', '', '', '', '', '', '', '', '', ''),
-		(32, 'menu_text', '#ffffff', '', '14', '#29c7c9', '14', '', '', '', '', '', '', ''),
-		(33, 'use_header', '', '', '', '', '', '', '', '', '', '', '', ''),
-		(34, 'm_header_background', '', '', 'rgba(0, 0, 0, .5)', '', '', '', '', '', '', '', '', ''),
-		(35, 'header_background', '', '', 'rgba(0, 0, 0, .5)', '', '', '', '', '', '', '', '', ''),
-		(36, 'equalizer', '#29c7c9', '', '#000000', '', '', '', '', '', '', '', '', ''),
-		(37, 'board_table', '', '', '', '', '', '', '', '', '', '', '', ''),
-		(38, 'list_header', '#000000', '', '#ffffff', '#333333', 'double', '1', '||top||bottom||', '', '', '', '', ''),
-		(39, 'list_body', '', '', '#ffffff', '', '', '', '', '', '', '', '', ''),
-		(40, 'form_header', '#000000', '', '#ffffff', '', '', '', '', '', '', '', '', ''),
-		(41, 'form_body', 'rgba(255, 255, 255, .1)', '', '#ffffff', '#333333', 'solid', '1', '||top||bottom||', '', '', '', '', ''),
-		(42, 'sub_menu', 'rgba(0, 0, 0, .5)', '', '#eeeeee', '#555555', 'dashed', '1', '||top||bottom||', '#29c7c9', '', '', '', ''),
-		(43, 'mmb_counter', '', '', '', '', '', '', '', '', '', '', '', '')";
+
+$sql = "INSERT INTO `{$table_prefix}css_config` (`cs_id`, `cs_name`, `cs_value`, `cs_descript`, `cs_etc_1`, `cs_etc_2`, `cs_etc_3`, `cs_etc_4`, `cs_etc_5`, `cs_etc_6`, `cs_etc_7`, `cs_etc_8`, `cs_etc_9`, `cs_etc_10`, `cs_etc_11`, `cs_etc_12`, `cs_etc_13`, `cs_etc_14`, `cs_etc_15`, `cs_etc_16`, `cs_etc_17`, `cs_etc_18`, `cs_etc_19`, `cs_etc_20`) VALUES
+(1, 'use_header', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(2, 'logo', '".$g5_path['url']."/img/default_site_img/design_logo.png', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(3, 'background', '".$g5_path['url']."/img/default_site_img/design_background.png', '', '#ffffff', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(4, 'm_background', '".$g5_path['url']."/img/default_site_img/design_m_background.png', '', '#ffffff', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(5, 'menu_icon', '#ffffff', '', '60', '', '', '', '', '#ecc6c6', '', 'solid', '1', '#ecc6c6', '', '15', 'diamond', '', '', '', '', '', '', ''),
+(6, 'menu_tooltip', '#d6817e', '', '50', '#ffffff', '', '12', '20', '20', '20', '20', '\'PyeongChangPeace-Light\'', '', '', '', '', '', '', '', '', '', '', ''),
+(7, 'board_notice', '#ecc6c6', '', '80', '#777777', '', '#ecc6c6', '', 'solid', '1', '||top||bottom||left||right||', '15', '0', '15', '0', '', '', '', '', '', '', '', ''),
+(8, 'board_table', '', '', '90', '', '', '', '', '', '', '', '0', '0', '0', '0', '', '', '', '', '', '', '', ''),
+(9, 'list_header', '#ecc6c6', '', '', '#ffffff', '', '#ffffff', '50', 'solid', '1', '||left||right||', '', '', '', '', '', '', '', '', '', '', '', ''),
+(10, 'list_body', '#ffffff', '', '50', '#777777', '', '#ecc6c6', '50', 'solid', '1', '||top||bottom||', '', '', '', '', '', '', '', '', '', '', '', ''),
+(11, 'form_header', '#ecc6c6', '', '', '#ffffff', '', '#ffffff', '50', 'solid', '1', '||top||bottom||', '', '', '', '', '', '', '', '', '', '', '', ''),
+(12, 'form_body', '#ffffff', '', '50', '#777777', '', '#ecc6c6', '', 'solid', '1', '||top||bottom||left||right||', '', '', '', '', '', '', '', '', '', '', '', ''),
+(13, 'btn_default', '#ecc6c6', '', '', '#ffffff', '', '#e8b0ae', '', '#e8b0ae', '', '#ffffff', '', '#e69d98', '', '20', '20', '20', '20', '', '', '', '', ''),
+(14, 'btn_point', '#b0c4de', '', '', '#ffffff', '', '#b0c4de', '', '#88a9db', '', '#ffffff', '', '#779bdb', '', '20', '20', '20', '20', '', '', '', '', ''),
+(15, 'btn_etc', '#eaeaea', '', '', '#777777', '', '#dedede', '', '#dedede', '', '#777777', '', '#cacaca', '', '20', '20', '20', '20', '', '', '', '', ''),
+(16, 'mmb_list_item', '', '', '', '', '', '', '', '', '', '', '40', '', '', '', '', '', '', '', '', '', '', ''),
+(17, 'mmb_list', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(18, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(19, 'mmb_log', '', '', '', '#777777', '', '#ecc6c6', '', 'solid', '4', '||top||bottom||', '', '', '', '', '', '', '', '', '', '', '', ''),
+(20, 'mmb_reply', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(21, 'mmb_reply_item', '#ffffff', '', '100', '#777777', '', '#ecc6c6', '', 'dotted', '1', '||top||bottom||left||right||', '10', '', '', '', '', '', '', '', '', '', '', ''),
+(22, 'mmb_name', '#ecc6c6', '', '', '14', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(23, 'mmb_owner_name', '#ecc6c6', '', '', '14', '◇', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(24, 'mmb_datetime', '#c7c7c7', '', '', '11', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(25, 'mmb_link', '#ecc6c6', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(26, 'mmb_log_ank', '#ecc6c6', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(27, 'mmb_hash', '#ecc6c6', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(28, 'default_font', '#777777', '', '', '13', '\'S-CoreDream-3Light\'', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(29, 'color_default', '#ecc6c6', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(30, 'color_bak', '#ffffff', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(31, 'color_point', '#b0c4de', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(32, 'input_bak', '#ffffff', '', '20', '30', '#777777', '', '13', '#ecc6c6', '', '20', '20', '20', '20', '', '', '', '', '', '', '', '', ''),
+(33, 'mmb_contain_bak', '', '', '#ffffff', '50', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(34, 'box_style', '#ecc6c6', '', '50', '#ffffff', '', '#ecc6c6', '', 'dotted', '2', '||top||bottom||left||right||', '10', '10', '10', '10', '', '', '', '', '', '', '', ''),
+(35, 'intro_use', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(36, 'intro_background', '', '', '#ecc6c6', '90', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(37, 'intro', '".$g5_path['url']."/img/default_site_img/design_intro.png', '', 'ENTER →', '#d1d1d1', '', '17', '\'PyeongChangPeace-Light\'', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(38, 'scrollbar', '#ffffff', '', '', '5', '#ecc6c6', '', '20', '20', '20', '20', '', '', '', '', '', '', '', '', '', '', '', ''),
+(39, 'menu_position', 'B', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(40, 'content_width', '1000', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');";
+
 sql_query($sql, true, $dblink);
 
 
@@ -288,15 +278,7 @@ $dir_arr = array (
     $data_path.'/content',
     $data_path.'/faq',
     $data_path.'/tmp',
-	$data_path.'/banner',
-	$data_path.'/intro',
-	$data_path.'/character',
-	$data_path.'/item',
-	$data_path.'/emoticon',
-	$data_path.'/side',
 	$data_path.'/site',
-	$data_path.'/title',
-	$data_path.'/class'
 );
 
 for ($i=0; $i<count($dir_arr); $i++) {
@@ -358,33 +340,7 @@ fwrite($f, "\$g5['faq_master_table'] = G5_TABLE_PREFIX.'faq_master'; // 자주�
 fwrite($f, "\$g5['new_win_table'] = G5_TABLE_PREFIX.'new_win'; // 새창 테이블\n");
 fwrite($f, "\$g5['menu_table'] = G5_TABLE_PREFIX.'menu'; // 메뉴관리 테이블\n");
 fwrite($f, "\$g5['banner_table'] = G5_TABLE_PREFIX.'banner'; // 배너 테이블\n");
-fwrite($f, "\$g5['intro_table'] = G5_TABLE_PREFIX.'intro'; // 인트로 테이블\n");
-fwrite($f, "\$g5['character_table'] = G5_TABLE_PREFIX.'character'; // 캐릭터 테이블\n");
-fwrite($f, "\$g5['class_table'] = G5_TABLE_PREFIX.'character_class'; // 캐릭터 클래스 테이블\n");
-fwrite($f, "\$g5['side_table'] = G5_TABLE_PREFIX.'character_side'; // 캐릭터 소속 테이블\n");
-fwrite($f, "\$g5['title_table'] = G5_TABLE_PREFIX.'character_title'; // 캐릭터 타이틀 테이블\n");
-fwrite($f, "\$g5['title_has_table'] = G5_TABLE_PREFIX.'has_title'; // 캐릭터 보유 타이틀 테이블\n");
-fwrite($f, "\$g5['couple_table'] = G5_TABLE_PREFIX.'couple'; // 커플관리 테이블\n");
-fwrite($f, "\$g5['emoticon_table'] = G5_TABLE_PREFIX.'emoticon'; // 이모티콘 테이블\n");
-fwrite($f, "\$g5['exp_table'] = G5_TABLE_PREFIX.'exp'; // 캐릭터 경험치 테이블\n");
-fwrite($f, "\$g5['inventory_table'] = G5_TABLE_PREFIX.'inventory'; // 캐릭터 인벤토리 테이블\n");
-fwrite($f, "\$g5['item_table'] = G5_TABLE_PREFIX.'item'; // 캐릭터 아이템 테이블\n");
-fwrite($f, "\$g5['recepi_table'] = G5_TABLE_PREFIX.'item_recepi'; // 캐릭터 레시피 테이블\n");
-fwrite($f, "\$g5['explorer_table'] = G5_TABLE_PREFIX.'item_explorer'; // 아이템 획득 \n");
-fwrite($f, "\$g5['relation_table'] = G5_TABLE_PREFIX.'relation_character'; // 관계설정 테이블\n");
-fwrite($f, "\$g5['order_table'] = G5_TABLE_PREFIX.'order'; // 주문관리 테이블\n");
-fwrite($f, "\$g5['closthes_table'] = G5_TABLE_PREFIX.'character_closthes'; // 캐릭터 의상 테이블\n");
-fwrite($f, "\$g5['call_table'] = G5_TABLE_PREFIX.'call_board'; // 호출 테이블\n");
 fwrite($f, "\$g5['css_table'] = G5_TABLE_PREFIX.'css_config'; // CSS STYLE 정의 저장하는 테이블\n");
-fwrite($f, "\$g5['article_table'] = G5_TABLE_PREFIX.'article'; // 프로필 항목 저장 테이블\n");
-fwrite($f, "\$g5['article_default_table'] = G5_TABLE_PREFIX.'article_default'; // 프로필 기본 항목 설정값 테이블\n");
-fwrite($f, "\$g5['value_table'] = G5_TABLE_PREFIX.'article_value'; // 프로필 항목 값 테이블\n");
-fwrite($f, "\$g5['level_table'] = G5_TABLE_PREFIX.'level_setting'; // 레벨 업 셋팅 테이블\n");
-fwrite($f, "\$g5['shop_table'] = G5_TABLE_PREFIX.'shop'; // 상점테이블\n");
-fwrite($f, "\$g5['status_config_table'] = G5_TABLE_PREFIX.'status'; // 스탯 설정 테이블\n");
-fwrite($f, "\$g5['status_table'] = G5_TABLE_PREFIX.'status_character'; // 스탯 보유 현황 테이블\n");
-fwrite($f, "\$g5['backup_table'] = G5_TABLE_PREFIX.'backup'; // 백업 테이블\n");
-fwrite($f, "\$g5['quest_table'] = G5_TABLE_PREFIX.'quest'; // 퀘스트 테이블\n");
 fwrite($f, "?>");
 
 fclose($f);

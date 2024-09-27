@@ -35,52 +35,16 @@ for ($index=0; $index<count($comment); $index++) {
 	$comment_owner_behind = "";		// 자기 로그 접미문자
 
 	if(!$log_comment['wr_noname']) { 
-		if(is_file(G5_DATA_PATH."/site/ico_admin") && $config['cf_admin'] == $log_comment['mb_id']) {
-			// 관리자 아이콘이 존재하고, 관리자와 작성자가 동일 할 경우
-			// 관리자 아이콘을 출력한다.
-			$log_comment['ch_name'] = "<img src='".G5_DATA_URL."/site/ico_admin' alt='관리자' />";
-		} else {
-			// 캐릭터 정보 로드
-			$ch = get_character($log_comment['ch_id']);
-			if($ch['ch_id']) {
-				// 캐릭터 정보가 존재할 경우, 캐릭터 정보를 추가한다.
-				// 캐릭터 링크
-				// + 캐릭터 소속 아이콘
-				// + 캐릭터 종족 아이콘
-				// + 캐릭터 이름
-				/*$log_comment['ch_name'] = "
-					<a href='".G5_URL."/member/viewer.php?ch_id={$ch['ch_id']}' target='_blank'>
-						<i>".get_side_icon($ch['ch_side']).get_class_icon($ch['ch_class'])."</i>
-						".get_title_image($log_comment['ti_id'])."
-						".($log_comment['wr_subject'] ? $log_comment['wr_subject'] : "GUEST")."
-					</a>";*/
-				$log_comment['ch_name'] = "
-					<a href='".G5_URL."/member/viewer.php?ch_id={$ch['ch_id']}' target='_blank'>
-						<i>".get_side_icon($ch['ch_side'])."</i>
-						".get_title_image($log_comment['ti_id'])."
-						".($ch['ch_name'] ? $ch['ch_name'] : "GUEST")."
-					</a>";
-			} else {
-				// 캐릭터 정보가 존재하지 않을 경우, 빈값을 출력한다.
-				$log_comment['ch_name'] = "";
-			}
-		}
-
 		// 오너 정보 출력
-		if($log_comment['mb_id']) {
-			$log_comment['name'] = "<a href='".G5_BBS_URL."/memo_form.php?me_recv_mb_id={$log_comment['mb_id']}' class='send_memo'>{$log_comment['wr_name']}</a>";
-		} else { 
-			$log_comment['name'] = $log_comment['wr_name'];
-		}
+		$log_comment['name'] = $log_comment['wr_name'];
 
-		if(!$list_item['wr_noname'] && $list_item['mb_id'] == $log_comment['mb_id']) { 
+		if($list_item['mb_id']!='' && $list_item['mb_id'] == $log_comment['mb_id']) { 
 			$is_comment_owner = true;
 			$comment_owner_front = $owner_front;
 			$comment_owner_behind = $owner_behind;
 		}
 	} else {
 		$is_comment_owner = false;
-
 	}
 ?>
 
@@ -88,36 +52,16 @@ for ($index=0; $index<count($comment); $index++) {
 <div class="item-comment" id="c_<?php echo $comment_id ?>">
 	<div class="co-header">
 		<? // 로그 작성자와 코멘트 작성자가 동일할 경우, class='owner' 를 추가한다. ?>
-		<? if(!$log_comment['wr_noname']) { ?>
 		<p <?=$is_comment_owner ? ' class="owner"' : ''?>>
 			<?=$comment_owner_front?>
-			<strong><?=$log_comment['ch_name']?></strong>
-			<span>[<?=$log_comment['name']?>]</span>
+			<span><?=$log_comment['name']?></span>
 			<?=$comment_owner_behind?>
 		</p>
-		<? } else { ?>
-		<p>익명의 누군가</p>
-		<? } ?>
 	</div>
 
 	<div class="co-content">
 		<div class="original_comment_area">
 			<?
-				// 액션 로그 정보 가져 오기
-				$data_log = $log_comment['wr_log'];
-				// 아이템 사용 정보 가져오기
-				$item_log = $log_comment['wr_item_log'];
-
-				include($board_skin_path."/_action.data.php");
-			
-				// 주사위를 굴린 정보가 있을 경우
-				if($log_comment['wr_dice1']) {
-			?>
-			<span class="dice">
-				<img src="<?=$board_skin_url?>/img/d<?=$log_comment['wr_dice1']?>.png" />
-				<img src="<?=$board_skin_url?>/img/d<?=$log_comment['wr_dice2']?>.png" />
-			</span>
-			<? } 
 				if($log_comment['wr_link1']) {
 					// 로그 등록 시 입력한 외부 링크 정보
 			?>

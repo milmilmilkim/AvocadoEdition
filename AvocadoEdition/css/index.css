@@ -27,5 +27,8 @@ html, body			{ position: relative; height: 100%; margin: 0; padding: 0; overflow
 #bgm a.on		{ display: inline-block; }
 #site_bgm_box	{ width: 0px; height: 0px; overflow: hidden; }
 
+html.single #header .bgm-btn {display:inline-block !important;}
 
+body #header,
+html.single #header {display:none;}
 

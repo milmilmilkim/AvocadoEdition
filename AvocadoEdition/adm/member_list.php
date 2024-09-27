@@ -94,15 +94,8 @@ $colspan = 10;
 <label for="stx" class="sound_only">검색어<strong class="sound_only"> 필수</strong></label>
 <input type="text" name="stx" value="<?php echo $stx ?>" id="stx" required class="required frm_input">
 <input type="submit" class="btn_submit" value="검색">
-
 </form>
-
-
-<?php if ($is_admin == 'super') { ?>
-<div class="btn_add01 btn_add">
-	<a href="./member_form.php" id="member_add">회원추가</a>
-</div>
-<?php } ?>
+<br />
 
 <form name="fmemberlist" id="fmemberlist" action="./member_list_update.php" onsubmit="return fmemberlist_submit(this);" method="post">
 <input type="hidden" name="sst" value="<?php echo $sst ?>">
@@ -117,18 +110,16 @@ $colspan = 10;
 	<caption><?php echo $g5['title']; ?> 목록</caption>
 	<thead>
 	<tr>
-		<th>
+		<th style="width:45px;">
 			<input type="checkbox" name="chkall" value="1" id="chkall" onclick="check_all(this.form)">
 		</th>
 		<th>아이디</a></th>
 		<th>이름</a></th>
-		<th>생년</a></th>
-		<th>보유캐릭터</a></th>
-		<th>상태</th>
-		<th>권한</th>
-		<th>가입일</a></th>
-		<th>최종접속</a></th>
-		<th>관리</th>
+		<th style="width:100px;">상태</th>
+		<th style="width:100px;">권한</th>
+		<th style="width:100px;">가입일</a></th>
+		<th style="width:100px;">최종접속</a></th>
+		<th style="width:50px;">관리</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -160,32 +151,11 @@ $colspan = 10;
 	<tr class="<?php echo $bg; ?>">
 		<td>
 			<input type="hidden" name="mb_id[<?php echo $i ?>]" value="<?php echo $row['mb_id'] ?>" id="mb_id_<?php echo $i ?>">
-			<label for="chk_<?php echo $i; ?>" class="sound_only"><?php echo get_text($row['mb_name']); ?> <?php echo get_text($row['mb_nick']); ?>님</label>
 			<input type="checkbox" name="chk[]" value="<?php echo $i ?>" id="chk_<?php echo $i ?>">
 		</td>
 
 		<td><?php echo $mb_id ?></td>
 		<td><?php echo get_text($row['mb_name']); ?></td>
-		<td><?php echo get_text($row['mb_birth']); ?></td>
-		<td class="txt-left">
-		<?
-			// 해당 멤버의 캐릭터 검색
-			$add_character_str = "";
-			$ch_result = sql_query("select ch_name, ch_id from {$g5['character_table']} where mb_id = '{$row['mb_id']}'");
-			for($j = 0; $ch = sql_fetch_array($ch_result); $j++) { 
-		?>
-			<?=$add_character_str?>
-			<a href="./character_form.php?w=u&amp;ch_id=<?=$ch['ch_id']?>"><?=$ch['ch_name']?></a>
-
-		<?
-				$add_character_str = " / ";
-			}
-			if($j == 0) { 
-		?>
-			<span style="color:#bbb;">보유중인 캐릭터가 없습니다.</span>
-		<? } ?>
-		</td>
-		
 		<td>
 			<?php
 			if ($leave_msg || $intercept_msg) echo $leave_msg.' '.$intercept_msg;
@@ -209,11 +179,20 @@ $colspan = 10;
 	</table>
 </div>
 
-<div class="btn_list01 btn_list">
-	<input type="submit" name="act_button" value="선택수정" onclick="document.pressed=this.value">
-	<input type="submit" name="act_button" value="선택탈퇴" onclick="document.pressed=this.value">
-	<input type="submit" name="act_button" value="완전삭제" onclick="document.pressed=this.value">
+<div class="btn_confirm">
+	<div class="btn ty3">
+		<span class="material-icons">build</span>
+		<input type="submit" name="act_button" value="선택수정" title="선택수정" onclick="document.pressed=this.value">
+	</div>
+	<div class="btn ty2">
+		<span class="material-icons">delete</span>
+		<input type="submit" name="act_button" value="완전삭제" title="완전삭제" onclick="document.pressed=this.value">
+	</div>
+	<?php if ($is_admin == 'super') { ?>
+		<a href="./member_form.php" title="회원추가" class="btn"><span class="material-icons">add</span></a>
+	<?php } ?>
 </div>
+
 
 </form>
 

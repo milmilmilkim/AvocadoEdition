@@ -3,17 +3,17 @@
 	if($is_member & !$config['cf_open']) {
 		goto_url(G5_URL.'/main.php');
 	}
-	if(defined('G5_THEME_PATH')) {
-		require_once(G5_THEME_PATH.'/enter.php');
-		return;
-	}
-	
+
 	/*********** Logo Data ************/
-	$logo = get_logo('pc');
+	$logo = get_logo();
 	$logo_data = "";
-	if($logo)		$logo_data .= "<img src='".$logo."' ";
-	if($m_logo)		$logo_data .= "class='only-pc' /><img src='".$m_logo."' class='not-pc'";
-	if($logo_data)	$logo_data.= " />";
+	if($logo)		$logo_data .= "<img src='{$logo}' />";
+	/*********************************/
+	
+	/*********** Intro Data ************/
+	$intro = get_style('intro');
+	if($intro['cs_value'])	$logo_data = "<img src='{$intro['cs_value']}' alt='' />";
+
 	/*********************************/
 ?>
 <!doctype html>
@@ -38,24 +38,22 @@
 
 	<link rel="shortcut icon" href="<?=$config['cf_favicon']?>">
 	<link rel="icon" href="<?=$config['cf_favicon']?>">
-	<link media="all" type="text/css" rel="stylesheet" href="<?=G5_CSS_URL?>/enter.css">
-	<?
-		if(!$config['cf_7']) { 
-			echo '<link rel="stylesheet" href="'.G5_DATA_URL.'/css/_design.config.css" type="text/css" />';
-		}
-	?>
-
+	<link media="all" type="text/css" rel="stylesheet" href="<?=G5_CSS_URL?>/enter.css?v=<?=$config['cf_css_version']?>">
+	<link media="all" type="text/css" rel="stylesheet" href="<?=G5_DATA_URL?>/css/_design.config.css?v=<?=$config['cf_css_version']?>" />
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script>
+	if(!parent || parent==this) $('html').addClass('single'); 
+	</script>
 </head>
 <body>
 
 
-<div class="wrapper">
+<div class="enterWrapper">
 	<div class="inner">
 		<div class="index-logo">
-			<a href="./main.php">
+			<a href="./main.php" onclick="fn_show_index_menu();">
 				<?=$logo_data?>
-				<p class="txt-default">본 홈페이지는 1920 * 1080 PC를 기준으로 제작되었으며, 크롬 브라우저 이용을 권장합니다.</p>
+				<p class="guide"><?=$intro['cs_etc_1']?></p>
 			</a>
 		</div>
 	</div>
@@ -67,6 +65,11 @@ window.onload=function() {
 	$('html').addClass('on')
 	setTimeout(function() { $('html').addClass('active') }, 800);
 };
+
+function fn_show_index_menu() {
+	if(parent && parent !== this) parent.show_menu();
+}
+
 </script>
 
 </body>

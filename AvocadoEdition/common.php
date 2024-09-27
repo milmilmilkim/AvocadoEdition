@@ -10,7 +10,6 @@ header('P3P: CP="ALL CURa ADMa DEVa TAIa OUR BUS IND PHY ONL UNI PUR FIN COM NAV
 if (!defined('G5_SET_TIME_LIMIT')) define('G5_SET_TIME_LIMIT', 0);
 @set_time_limit(G5_SET_TIME_LIMIT);
 
-
 //==========================================================================================================================
 // extract($_GET); 명령으로 인해 page.php?_POST[var1]=data1&_POST[var2]=data2 와 같은 코드가 _POST 변수로 사용되는 것을 막음
 // 081029 : letsgolee 님께서 도움 주셨습니다.
@@ -184,10 +183,10 @@ if (file_exists($dbconfig_file)) {
 //==============================================================================
 // 디자인 미설치
 //------------------------------------------------------------------------------
-if(!strstr($_SERVER["REQUEST_URI"], 'login') && !strstr($_SERVER["REQUEST_URI"], 'logout') && !defined('G5_IS_ADMIN')) { 
-	$check_design_setting = sql_fetch("select count(*) as cnt from {$g5['css_table']}");
-	
-	if(!$check_design_setting['cnt']) {
+if(strstr($url, 'adm')) { define('G5_IS_ADMIN', true); }
+if(!defined('G5_IS_ADMIN')) {
+	$cssconfig_file = G5_DATA_PATH.'/css/_design.config.css';
+	if (!file_exists($cssconfig_file)) {
 ?>
 	
 <!doctype html>
@@ -205,16 +204,16 @@ if(!strstr($_SERVER["REQUEST_URI"], 'login') && !strstr($_SERVER["REQUEST_URI"],
 		<h1>아보카도 에디션 설정을 완료해주십시오.</h1>
 		<br />
 		<div class="ins_inner">
-			<p>아보카도 에디션 설치가 완료 되었습니다.</p>
-			<p>하지만, 아보카도 에디션의 디자인 설정 및 캐릭터 프로필 설정이 완료되지 않았습니다.</p>
-			<p>사이트 관리 화면에서 디자인 설정 및 캐릭터 프로필 양식 설정을 완료하여 주시길 바랍니다. (최소 1번 이상 저장 필요)</p>
+			<p>아보카도 에디션 라이트 설치가 완료 되었습니다.</p>
+			<p>하지만, 아보카도 에디션의 디자인 설정이 완료되지 않았습니다.</p>
+			<p>사이트 관리 화면에서 디자인 설정을 완료하여 주시길 바랍니다. (최소 1번 이상 저장 필요)</p>
 			
 			<div class="inner_btn">
 				<a href="<?php echo G5_URL; ?>/adm/"><?php echo G5_VERSION ?> 관리자 바로가기</a>
 			</div>
 		</div>
 		<div id="ins_ft">
-			<strong>AVOCADO EDITION</strong>
+			<strong>AVOCADO EDITION : LIGHT</strong>
 			<p>GPL! OPEN SOURCE GNUBOARD</p>
 		</div>
 
@@ -474,7 +473,7 @@ if ($member['mb_id']) {
 
 
 if ($is_admin != 'super') {
-    // 접근가능 IP
+/*    // 접근가능 IP
     $cf_possible_ip = trim($config['cf_possible_ip']);
     if ($cf_possible_ip) {
         $is_possible_ip = false;
@@ -494,7 +493,7 @@ if ($is_admin != 'super') {
         if (!$is_possible_ip)
             die ("접근이 가능하지 않습니다.");
     }
-
+*/
     // 접근차단 IP
     $is_intercept_ip = false;
     $pattern = explode("\n", trim($config['cf_intercept_ip']));

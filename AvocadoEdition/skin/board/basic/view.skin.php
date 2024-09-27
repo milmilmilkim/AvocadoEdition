@@ -6,31 +6,29 @@ include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
 ?>
 
-<div class="frame-theme-BODY" id="view_<?=$bo_table?>">
-	<div class="inner">
+
 
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
-
-
 <article id="bo_v">
-	<header>
-		<h1 id="bo_v_title">
-			<div class="frm-theme-COMMENT">
-				<div class="inner">
-					<?php
-					if ($category_name) echo "[".$view['ca_name'].'] '; // 분류 출력 끝
-					echo cut_str(get_text($view['wr_subject']), 70); // 글제목 출력
-					?>
-				</div>
-			</div>
-		</h1>
-	</header>
+	
+	<? if($board['bo_content_head']) { ?>
+		<div class="board-notice-box">
+			<?=stripslashes($board['bo_content_head']);?>
+		</div>
+	<? } ?>
 
-	<section id="bo_v_info">
+	<div class="board-title">
+		<?php
+			if ($category_name) echo "<em>{$view['ca_name']}</em>"; // 분류 출력 끝
+			echo "<strong>".cut_str(get_text($view['wr_subject']), 70)."</strong>"; // 글제목 출력
+		?>
+	</div>
+
+	<div class="board-info">
 		<strong><?php echo $view['name'] ?><?php if ($is_ip_view) { echo "&nbsp;($ip)"; } ?></strong>
 		<strong><?php echo date("y-m-d H:i", strtotime($view['wr_datetime'])) ?></strong>
 		<strong><?php echo number_format($view['wr_hit']) ?></strong>
-	</section>
+	</div>
 
 	<?php
 	if ($view['file']['count']) {
@@ -44,33 +42,32 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
 	<?php if($cnt) { ?>
 	<!-- 첨부파일 시작 { -->
-	<section id="bo_v_file">
-		<h2>첨부파일</h2>
+	<div class="board-file">
 		<ul>
 		<?php
-		// 가변 파일
-		for ($i=0; $i<count($view['file']); $i++) {
-			if (isset($view['file'][$i]['source']) && $view['file'][$i]['source'] && !$view['file'][$i]['view']) {
-		 ?>
-			<li>
-				<a href="<?php echo $view['file'][$i]['href'];  ?>" class="view_file_download">
-					<img src="<?php echo $board_skin_url ?>/img/icon_file.gif" alt="첨부">
-					<strong><?php echo $view['file'][$i]['source'] ?></strong>
-					<?php echo $view['file'][$i]['content'] ?> (<?php echo $view['file'][$i]['size'] ?>)
-				</a>
-				<span class="bo_v_file_cnt"><?php echo $view['file'][$i]['download'] ?>회 다운로드</span>
-				<span>DATE : <?php echo $view['file'][$i]['datetime'] ?></span>
-			</li>
-		<?php
+			// 가변 파일
+			for ($i=0; $i<count($view['file']); $i++) {
+				if (isset($view['file'][$i]['source']) && $view['file'][$i]['source'] && !$view['file'][$i]['view']) {
+			 ?>
+				<li>
+					<a href="<?php echo $view['file'][$i]['href'];  ?>" class="view_file_download">
+						<img src="<?php echo $board_skin_url ?>/img/icon_file.gif" alt="첨부">
+						<strong><?php echo $view['file'][$i]['source'] ?></strong>
+						<?php echo $view['file'][$i]['content'] ?> (<?php echo $view['file'][$i]['size'] ?>)
+					</a>
+					<span class="bo_v_file_cnt"><?php echo $view['file'][$i]['download'] ?>회 다운로드</span>
+					<span>DATE : <?php echo $view['file'][$i]['datetime'] ?></span>
+				</li>
+			<?php
+				}
 			}
-		}
 		 ?>
 		</ul>
-	</section>
+	</div>
 	<!-- } 첨부파일 끝 -->
 	<?php } ?>
 
-	<section id="bo_v_atc">
+	<div class="board-content">
 		<?php
 		// 파일 출력
 		$v_img_count = count($view['file']);
@@ -90,35 +87,28 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
 		<!-- 본문 내용 시작 { -->
 		<div id="bo_v_con"><?php echo get_view_thumbnail($view['content']); ?></div>
-		<?php //echo $view['rich_content']; // {이미지:0} 과 같은 코드를 사용할 경우 ?>
-		<!-- } 본문 내용 끝 -->
 
-	</section>
+	</div>
 
 	<?php
-	include_once(G5_SNS_PATH."/view.sns.skin.php");
+		// 코멘트 입출력
+		include_once(G5_BBS_PATH.'/view_comment.php');
 	?>
-
-	<?php
-	// 코멘트 입출력
-	include_once(G5_BBS_PATH.'/view_comment.php');
-	 ?>
 
 	<!-- 링크 버튼 시작 { -->
 	<div id="bo_v_bot">
 		<div class="bo_v_com" style="text-align: right;">
-			<?php if ($update_href) { ?><a href="<?php echo $update_href ?>" class="ui-btn">수정</a><?php } ?>
-			<?php if ($delete_href) { ?><a href="<?php echo $delete_href ?>" class="ui-btn" onclick="del(this.href); return false;">삭제</a><?php } ?>
-			<a href="<?php echo $list_href ?>" class="ui-btn">목록</a>
-			<?php if ($reply_href) { ?><a href="<?php echo $reply_href ?>" class="ui-btn">답변</a><?php } ?>
-			<?php if ($write_href) { ?><a href="<?php echo $write_href ?>" class="ui-btn">글쓰기</a><?php } ?>
+			<?php if ($update_href) { ?><a href="<?php echo $update_href ?>" class="ui-btn etc"><i class="material-icons">edit</i> 수정</a><?php } ?>
+			<?php if ($delete_href) { ?><a href="<?php echo $delete_href ?>" class="ui-btn etc" onclick="del(this.href); return false;"><i class="material-icons">delete</i> 삭제</a><?php } ?>
+			<a href="<?php echo $list_href ?>" class="ui-btn etc"><i class="material-icons">list</i> 목록</a>
+			<?php if ($reply_href) { ?><a href="<?php echo $reply_href ?>" class="ui-btn"><i class="material-icons">list</i> 답변</a><?php } ?>
+			<?php if ($write_href) { ?><a href="<?php echo $write_href ?>" class="ui-btn point"><i class="material-icons">edit</i> 글쓰기</a><?php } ?>
 		</div>
 	</div>
 	<!-- } 링크 버튼 끝 -->
 
 </article>
 <!-- } 게시판 읽기 끝 -->
-<br /><br /><br /><br />
 <script>
 <?php if ($board['bo_download_point'] < 0) { ?>
 $(function() {
@@ -197,6 +187,3 @@ function excute_good(href, $el, $tx)
 }
 </script>
 <!-- } 게시글 읽기 끝 -->
-
-	</div>
-</div>

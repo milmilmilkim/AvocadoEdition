@@ -7,6 +7,16 @@ add_stylesheet('<link type="text/css" href="'.G5_PLUGIN_URL.'/jquery-ui/style.cs
 
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
 <script>
+jQuery.browser = {};
+(function () {
+	jQuery.browser.msie = false;
+	jQuery.browser.version = 0;
+	if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+		jQuery.browser.msie = true;
+		jQuery.browser.version = RegExp.$1;
+	}
+})();
+
 jQuery(function($){
     $.datepicker.regional["ko"] = {
         closeText: "닫기",

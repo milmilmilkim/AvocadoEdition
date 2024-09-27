@@ -16,45 +16,10 @@ if ($is_comment_write) {
 	<input type="hidden" name="spt" value="<?php echo $spt ?>">
 	<input type="hidden" name="page" value="<?php echo $page ?>">
 
-	<input type="hidden" name="ch_id" value="<?=$character['ch_id']?>" />
-	<input type="hidden" name="ti_id" value="<?=$character['ch_title']?>" />
-	<input type="hidden" name="ma_id" value="<?=$character['ma_id']?>" />
-	<input type="hidden" name="wr_subject" value="<?=$character['ch_name'] ? $character['ch_name'] : "GUEST"?>" />
+	<input type="hidden" name="wr_subject" value="<?=$member['mb_name'] ? $member['mb_name'] : "GUEST"?>" />
 
 	<div class="input-comment">
-	<? if(count($mmb_item) > 0) { ?>
-		<select name="use_item" class="full">
-			<option value="">사용할 아이템 선택</option>
-		<?	for($h=0; $h < count($mmb_item); $h++) { ?>
-			<option value="<?=$mmb_item[$h]['in_id']?>">
-				<?=$mmb_item[$h]['it_name']?>
-			</option>
-		<? } ?>
-		</select>
-	<? } ?>
-
 		<textarea name="wr_content" required class="required" title="내용"></textarea>
-
-		<div class="action-check form-input">
-		<? if($character['ch_state']=='승인') { ?>
-			<input type="radio" name="action" id="action_<?=$list_item['wr_id']?>_" value="" checked/>
-			<label for="action_<?=$list_item['wr_id']?>_">일반행동&nbsp;&nbsp;&nbsp;&nbsp;</label>
-			<? if($is_able_search) { ?>
-			<input type="radio" name="action" id="action_<?=$list_item['wr_id']?>_S" value="S" />
-			<label for="action_<?=$list_item['wr_id']?>_S">탐색&nbsp;&nbsp;&nbsp;&nbsp;</label>
-			<? } ?>
-		<? } ?>
-
-			<input type="checkbox" name="game" id="game_<?=$list_item['wr_id']?>" value="dice" />
-			<label for="game_<?=$list_item['wr_id']?>">주사위</label>
-
-		<? if($board['bo_use_noname'] && $is_member) { ?>
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="checkbox" name="wr_noname" id="wr_noname_<?=$list_item['wr_id']?>" value="1" />
-			<label for="wr_noname_<?=$list_item['wr_id']?>">익명</label>
-		<? } ?>
-		</div>
-
 	</div>
 	<div class="btn_confirm">
 		<button type="submit" class="ui-comment-submit ui-btn">입력</button>

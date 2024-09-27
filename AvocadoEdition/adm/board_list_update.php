@@ -31,10 +31,11 @@ if ($_POST['act_button'] == "선택수정") {
 					set gr_id               = '{$_POST['gr_id'][$k]}',
 						bo_subject          = '{$_POST['bo_subject'][$k]}',
 						bo_skin             = '{$_POST['bo_skin'][$k]}',
-						bo_read_point       = '{$_POST['bo_read_point'][$k]}',
-						bo_write_point      = '{$_POST['bo_write_point'][$k]}',
-						bo_comment_point    = '{$_POST['bo_comment_point'][$k]}',
-						bo_download_point   = '{$_POST['bo_download_point'][$k]}'
+						bo_list_level       = '{$_POST['bo_list_level'][$k]}',
+						bo_read_level      = '{$_POST['bo_read_level'][$k]}',
+						bo_write_level    = '{$_POST['bo_write_level'][$k]}',
+						bo_comment_level    = '{$_POST['bo_comment_level'][$k]}',
+						bo_reply_level   = '{$_POST['bo_reply_level'][$k]}'
 				  where bo_table            = '{$_POST['board_table'][$k]}' ";
 		sql_query($sql);
 	}
@@ -63,5 +64,5 @@ if ($_POST['act_button'] == "선택수정") {
 
 }
 
-goto_url('./board_list.php?'.$qstr);
+goto_url('./board_list.php');
 ?>

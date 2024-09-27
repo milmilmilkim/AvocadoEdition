@@ -258,8 +258,11 @@ this.form.mb_intercept_date.value=this.form.mb_intercept_date.defaultValue; }">
 </div>
 
 <div class="btn_confirm01 btn_confirm">
-	<input type="submit" value="확인" class="btn_submit" accesskey='s'>
-	<a href="./member_list.php?<?php echo $qstr ?>">목록</a>
+	<a href="./member_list.php?<?php echo $qstr ?>" class="btn ty2"><span class="material-icons">list</span></a>
+	<div class="btn">
+		<span class="material-icons">save</span>
+		<input type="submit" value="확인" class="btn_submit" accesskey='s'>
+	</div>
 </div>
 </form>
 

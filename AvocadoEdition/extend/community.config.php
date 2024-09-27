@@ -2,12 +2,31 @@
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 
 $yoil = array("일","월","화","수","목","금","토");
-
-
 $is_add_register = $config['cf_1'] ? true : false;
-$is_add_character = $config['cf_2'] ? true : false;
-$is_mod_character = $config['cf_3'] ? true : false;
-$is_able_search = ($config['cf_4'] && $config['cf_6']  && $character['ch_search'] < $config['cf_search_count']) ? true : false;
+
+
+// 분류 옵션을 얻음
+// 4.00 에서는 카테고리 테이블을 없애고 보드테이블에 있는 내용으로 대체
+function get_category_list($bo_table='', $ca_name='')
+{
+	global $g5, $board, $is_admin;
+
+	$categories = explode("|", $board['bo_category_list']); // 구분자가 | 로 되어 있음
+	$str = "";
+	for ($i=0; $i<count($categories); $i++) {
+		$category = trim($categories[$i]);
+		if (!$category) continue;
+
+		$btn_class = "etc";
+		if ($category == $ca_name) {
+			$btn_class = " point";
+		}
+
+		$str .= "<li><a href='?bo_table={$bo_table}&amp;sca={$categories[$i]}' class='ui-btn {$btn_class}'>$categories[$i]</a></li>\n";
+	}
+
+	return $str;
+}
 
 
 // MMB LIST 이미지 가져오기
@@ -95,15 +114,9 @@ function goto_url_top($url)
 }
 
 // 로고 정보 가져오기
-function get_logo($type) {
+function get_logo() {
 	global $g5;
-
-	if($type == 'pc') { 
-		$logo = sql_fetch("select cs_value from {$g5['css_table']} where cs_name = 'logo'");
-	} else {
-		$logo = sql_fetch("select cs_value from {$g5['css_table']} where cs_name = 'm_logo'");
-	}
-
+	$logo = sql_fetch("select cs_value from {$g5['css_table']} where cs_name = 'logo'");
 	return $logo['cs_value'];
 }
 
@@ -228,34 +241,6 @@ function get_site_content($co_id) {
 }
 
 
-// 쪽지 보내기
-function send_memo($se_mb_id, $re_mb_id, $memo_content) {
-	global $g5, $config;
-	
-	// 쪽지 INSERT
-	$tmp_row = sql_fetch(" select max(me_id) as max_me_id from {$g5['memo_table']} ");
-	$me_id = $tmp_row['max_me_id'] + 1;
-
-	$sql = " insert into {$g5['memo_table']} 
-			set	me_id = '{$me_id}',
-				me_recv_mb_id = '{$re_mb_id}',
-				me_send_mb_id = '{$se_mb_id}',
-				me_send_datetime = '".G5_TIME_YMDHIS."',
-				me_memo = '{$memo_content}'";
-	sql_query($sql);
-
-	$se_mb_name = get_member_name($se_mb_id);
-
-	// 실시간 쪽지 알림 기능
-	$sql = " update {$g5['member_table']}
-			set		mb_memo_call = '".$se_mb_name."'
-			where	mb_id = '{$re_mb_id}' ";
-	sql_query($sql);
-
-	return true;
-}
-
-
 function emote_ev($comment) {
 	global $g5;
 	
@@ -291,5 +276,33 @@ function j ($s, $have_jongsung) {
     return have_jongsung($last_chr) ?
         $have_jongsung :
         $no_jongsung;
+}
+
+
+function hex2rgba($color, $opacity = false) {
+	$default = 'rgb(0,0,0)';
+	if(empty($color)) return $default; 
+	if ($color[0] == '#' ) {
+		$color = substr($color, 1);
+	}
+	if (strlen($color) == 6) {
+		$hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
+	} elseif ( strlen( $color ) == 3 ) {
+		$hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
+	} else {
+		return $default;
+	}
+
+	$rgb =  array_map('hexdec', $hex);
+
+	if($opacity){
+		$opacity = (100 - $opacity) / 100;
+		if(abs($opacity) > 1)
+			$opacity = 1.0;
+		$output = 'rgba('.implode(",",$rgb).','.$opacity.')';
+	} else {
+		$output = 'rgb('.implode(",",$rgb).')';
+	}
+	return $output;
 }
 ?>

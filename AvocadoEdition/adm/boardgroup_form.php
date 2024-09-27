@@ -31,6 +31,13 @@ $g5['title'] = $html_title;
 include_once('./admin.head.php');
 ?>
 
+<div class="local_desc01 local_desc">
+    <p>
+        게시판을 생성하시려면 1개 이상의 게시판그룹이 필요합니다.<br>
+        게시판그룹을 이용하시면 더 효과적으로 게시판을 관리할 수 있습니다.
+    </p>
+</div>
+
 <form name="fboardgroup" id="fboardgroup" action="./boardgroup_form_update.php" onsubmit="return fboardgroup_check(this);" method="post" autocomplete="off">
 <input type="hidden" name="w" value="<?php echo $w ?>">
 <input type="hidden" name="sfl" value="<?php echo $sfl ?>">
@@ -39,12 +46,13 @@ include_once('./admin.head.php');
 <input type="hidden" name="sod" value="<?php echo $sod ?>">
 <input type="hidden" name="page" value="<?php echo $page ?>">
 <input type="hidden" name="token" value="">
+<input type="hidden" name="gr_device" value="both">
 
 <div class="tbl_frm01 tbl_wrap">
     <table>
     <caption><?php echo $g5['title']; ?></caption>
     <colgroup>
-        <col class="grid_4">
+        <col style="width:120px;">
         <col>
     </colgroup>
     <tbody>
@@ -67,47 +75,6 @@ include_once('./admin.head.php');
             ?>
         </td>
     </tr>
-    <tr>
-        <th scope="row"><label for="gr_device">접속기기</label></th>
-        <td>
-            <?php echo help("PC 와 모바일 사용을 구분합니다.") ?>
-            <select id="gr_device" name="gr_device">
-                <option value="both"<?php echo get_selected($group['gr_device'], 'both', true); ?>>PC와 모바일에서 모두 사용</option>
-                <option value="pc"<?php echo get_selected($group['gr_device'], 'pc'); ?>>PC 전용</option>
-                <option value="mobile"<?php echo get_selected($group['gr_device'], 'mobile'); ?>>모바일 전용</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <th scope="row"><?php if ($is_admin == 'super') { ?><label for="gr_admin"><?php } ?>그룹 관리자<?php if ($is_admin == 'super') { ?></label><?php } ?></th>
-        <td>
-            <?php
-            if ($is_admin == 'super')
-                echo '<input type="text" id="gr_admin" name="gr_admin" class="frm_input" value="'.$gr['gr_admin'].'" maxlength="20">';
-            else
-                echo '<input type="hidden" id="gr_admin" name="gr_admin" value="'.$gr['gr_admin'].'">'.$gr['gr_admin'];
-            ?>
-        </td>
-    </tr>
-    <tr>
-        <th scope="row"><label for="gr_use_access">접근회원사용</label></th>
-        <td>
-            <?php echo help("사용에 체크하시면 이 그룹에 속한 게시판은 접근가능한 회원만 접근이 가능합니다.") ?>
-            <input type="checkbox" name="gr_use_access" value="1" id="gr_use_access" <?php echo $gr['gr_use_access']?'checked':''; ?>>
-            사용
-        </td>
-    </tr>
-    <tr>
-        <th scope="row">접근회원수</th>
-        <td>
-            <?php
-            // 접근회원수
-            $sql1 = " select count(*) as cnt from {$g5['group_member_table']} where gr_id = '{$gr_id}' ";
-            $row1 = sql_fetch($sql1);
-            echo '<a href="./boardgroupmember_list.php?gr_id='.$gr_id.'">'.$row1['cnt'].'</a>';
-            ?>
-        </td>
-    </tr>
     <?php for ($i=1;$i<=10;$i++) { ?>
     <tr>
         <th scope="row">여분필드<?php echo $i ?></th>
@@ -124,18 +91,14 @@ include_once('./admin.head.php');
 </div>
 
 <div class="btn_confirm01 btn_confirm">
-    <input type="submit" class="btn_submit" accesskey="s" value="확인">
-    <a href="./boardgroup_list.php?<?php echo $qstr ?>">목록</a>
+	<a href="./boardgroup_list.php" title="목록" class="btn ty2"><span class="material-icons">list</span></a>
+	<div class="btn">
+		<span class="material-icons">save</span>
+		<input type="submit" value="확인" class="btn_submit" accesskey="s">
+	</div>
 </div>
 
 </form>
-
-<div class="local_desc01 local_desc">
-    <p>
-        게시판을 생성하시려면 1개 이상의 게시판그룹이 필요합니다.<br>
-        게시판그룹을 이용하시면 더 효과적으로 게시판을 관리할 수 있습니다.
-    </p>
-</div>
 
 <script>
 function fboardgroup_check(f)

@@ -2,10 +2,6 @@
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
 
-if($board['bo_use_chick'] && $w == '') { 
-	goto_url(G5_HTTP_BBS_URL.'/board.php?bo_table='.$bo_table.$qstr);
-}
-
 $is_error = false;
 $option = '';
 $option_hidden = '';
@@ -16,11 +12,7 @@ if ($is_notice || $is_html || $is_secret || $is_mail) {
 	}
 
 	if ($is_html) {
-		if ($is_dhtml_editor) {
-			$option_hidden .= '<input type="hidden" value="html1" name="html">';
-		} else {
-			$option .= "\n".'<input type="checkbox" id="html" name="html" onclick="html_auto_br(this);" value="'.$html_value.'" '.$html_checked.'>'."\n".'<label for="html">html</label>';
-		}
+		$option .= "\n".'<input type="checkbox" id="html" name="html" onclick="html_auto_br(this);" value="'.$html_value.'" '.$html_checked.'>'."\n".'<label for="html">html</label>';
 	}
 
 	if ($is_secret) {
@@ -36,42 +28,7 @@ if ($is_notice || $is_html || $is_secret || $is_mail) {
 	}
 }
 
-/*if(!$character['ch_id']) {
-?>
-	<div class='error'>
-	<? if(!$is_member) { ?>
-		작성권한이 없습니다.<br />
-		계정로그인을 해주시길 바랍니다.
-
-		<div class="btn-group txt-center">
-			<a href="<?=G5_BBS_URL?>/login.php" class="ui-btn">로그인</a>
-			<a href="./board.php?bo_table=<?=$bo_table?>" class="ui-btn">목록으로</a>
-		</div>
-	<? } else { ?>
-		대표캐릭터가 설정되지 않았습니다.<br />
-		마이페이지에서 대표 캐릭터를 선택해 주시길 바랍니다.
-
-		<div class="btn-group txt-center">
-			<a href="<?=G5_URL?>/mypage" class="ui-btn">마이페이지</a>
-			<a href="./board.php?bo_table=<?=$bo_table?>" class="ui-btn">목록으로</a>
-		</div>
-	<? } ?>
-	</div>
-<?
-	$is_error = true;
-}*/
-
 if(!$is_error) { 
-
-	if($character['ch_id']) { 
-		// 사용가능 아이템 검색
-		$temp_sql = "select it.it_id, it.it_name, inven.in_id from {$g5['inventory_table']} inven, {$g5['item_table']} it where it.it_id = inven.it_id and it.it_use_mmb_able = '1' and inven.ch_id = '{$character['ch_id']}'";
-		$mmb_item_result = sql_query($temp_sql);
-		$mmb_item = array();
-		for($i = 0; $row = sql_fetch_array($mmb_item_result); $i++) {
-			$mmb_item[$i] = $row;
-		}
-	}
 
 	// 카테고리 재정의
 	$is_category = false;
@@ -119,22 +76,13 @@ if(!$is_error) {
 		}
 
 		if($write['wr_subject'] == "--|UPLOADING|--")	{
-			$write['wr_subject'] = $character['ch_name'];
+			$write['wr_subject'] = $member['mb_name'];
 			if(!$write['wr_subject']) $write['wr_subject'] = 'GUEST';
 		}
-
 	} else { 
-		$write['wr_subject'] = $character['ch_name'];
+		$write['wr_subject'] = $member['mb_name'];
 		if(!$write['wr_subject']) $write['wr_subject'] = 'GUEST';
 	}
-
-	$temp_sql = "select ch_thumb, mb_id, ch_id, ch_name from {$g5['character_table']} where ch_state = '승인' and ch_type != 'test' and ch_id != '{$character['ch_id']}' order by ch_type asc, ch_name asc";
-	$re_ch_result = sql_query($temp_sql);
-	$re_ch = array();
-	for($i = 0; $row = sql_fetch_array($re_ch_result); $i++) {
-		$re_ch[$i] = $row;
-	}
-
 	?>
 
 	<div id="load_log_board">
@@ -193,116 +141,7 @@ if(!$is_error) {
 				</ul>
 			<?php } ?>
 
-			<? if(!$write['wr_log'] && $character['ch_state']=='승인') { ?>
-				<div id="board_action" class="inner">
-					<dl>
-						<dt>
-							<label for="action"><i class="icon act"></i>Action</label>
-						</dt>
-						<dd>
-							<select name="action" id="action">
-								<option value="">일반행동</option>
-							<? if($is_able_search) { ?>
-								<option value="S">탐색</option>
-							<? } ?>
-							<? if($config['cf_5']) { ?>
-								<option value="H">조합</option>
-							<? } ?>
-							</select>
-						</dd>
-					</dl>
-
-					<div class="comment-data" id="action_Z">
-					<?
-						// 다이스 관련 입력
-					?>
-						<dl>
-							<dt style="font-size: 12px;">다이스 개수</dt>
-							<dd>
-								<input type="text" name="dice_count" id="dice_count" value="" style="width: 50px;"/> 개 굴립니다.
-							</dd>
-						</dl>
-						
-					</div>
-
-					<div class="comment-data" id="action_H">
-					<?
-						// 조합 커멘드 관련 입력
-					?>
-						<dl>
-							<dt>ITEM 1</dt>
-							<dd>
-								<select name="make_1" id="make_1" class="make-imtem">
-									<option value="">재료 선택</option>
-						<?
-							$re_result = sql_query("select * from {$g5['inventory_table']} inven, {$g5['item_table']} it where inven.ch_id = '{$character['ch_id']}' and it.it_use_recepi = 1 and inven.it_id = it.it_id");
-							for($i=0; $re_row = sql_fetch_array($re_result); $i++) { 
-						?>
-									<option value="<?=$re_row['in_id']?>">
-										<?=$re_row['it_name']?>
-									</option>
-						<?
-							} ?>
-								</select>
-							</dd>
-						</dl>
-						<dl>
-							<dt>ITEM 2</dt>
-							<dd>
-								<select name="make_2" id="make_2" class="make-imtem">
-									<option value="">재료 선택</option>
-						<?
-							$re_result = sql_query("select * from {$g5['inventory_table']} inven, {$g5['item_table']} it where inven.ch_id = '{$character['ch_id']}' and it.it_use_recepi = 1 and inven.it_id = it.it_id");
-							for($i=0; $re_row = sql_fetch_array($re_result); $i++) { 
-						?>
-									<option value="<?=$re_row['in_id']?>">
-										<?=$re_row['it_name']?>
-									</option>
-						<?
-							} ?>
-								</select>
-							</dd>
-						</dl>
-						<dl>
-							<dt>ITEM 3</dt>
-							<dd>
-								<select name="make_3" id="make_3" class="make-imtem">
-									<option value="">재료 선택</option>
-						<?
-							$re_result = sql_query("select * from {$g5['inventory_table']} inven, {$g5['item_table']} it where inven.ch_id = '{$character['ch_id']}' and it.it_use_recepi = 1 and inven.it_id = it.it_id");
-							for($i=0; $re_row = sql_fetch_array($re_result); $i++) { 
-						?>
-									<option value="<?=$re_row['in_id']?>">
-										<?=$re_row['it_name']?>
-									</option>
-						<?
-							} ?>
-								</select>
-							</dd>
-						</dl>
-					</div>
-					
-				</div>
-			<? } ?>
-
 				<div class="inner">
-
-				<? if(!$write['wr_item_log'] && $character['ch_state']=='승인' && count($mmb_item) > 0) { ?>
-					<dl>
-						<dt>
-							<label for="use_item"><i class="icon item"></i>Item</label>
-						</dt>
-						<dd>
-							<select name="use_item">
-								<option value="">사용할 아이템 선택</option>
-							<?
-								for($i=0; $i < count($mmb_item); $i++) { ?>
-								<option value="<?=$mmb_item[$i]['in_id']?>"><?=$mmb_item[$i]['it_name']?></option>
-							<? } ?>
-							</select>
-						</dd>
-					</dl>
-				<? } ?>
 					<!-- 일반 커맨드 -->
 					<?
 						/******************************************************
@@ -315,15 +154,6 @@ if(!$is_error) {
 							<i class="icon gear"></i>Option
 						</dt>
 						<dd>
-							<fieldset>
-					<? if(!$write['wr_dice1']) { ?>
-								<input type="checkbox" id="game" name="game" value="dice" /> <label for="game">일반주사위</label>
-					<? } else { 
-					?>
-								<img src="<?=$board_skin_url?>/img/d<?=$write['wr_dice1']?>.png" />
-								<img src="<?=$board_skin_url?>/img/d<?=$write['wr_dice2']?>.png" />
-					<? } ?>
-							</fieldset>
 					<? if($is_member) { ?>
 							<fieldset>
 								<input type="checkbox" id="wr_secret" name="wr_secret" value="1" <?=$write['wr_secret'] ? "checked" : ""?>/>
@@ -342,12 +172,6 @@ if(!$is_error) {
 								<input type="checkbox" id="wr_plip" name="wr_plip" value="1" <?=$write['wr_plip'] ? "checked" : ""?>/>
 								<label for="wr_plip">로그접기 (<?=$board['bo_gallery_height']?>px 이상은 자동으로 접힙니다.)</label>
 							</fieldset>
-							<? if($board['bo_use_noname'] && $is_member) { ?>
-							<fieldset>
-								<input type="checkbox" id="wr_noname" name="wr_noname" value="1" <?=$write['wr_noname'] ? "checked" : ""?>/>
-								<label for="wr_noname">익명</label>
-							</fieldset>
-							<? } ?>
 						</dd>
 					</dl>
 					
@@ -390,16 +214,8 @@ if(!$is_error) {
 			<hr class="padding small" />
 
 			<div class="comments">
-				<?php if($write_min || $write_max) { ?>
-				<!-- 최소/최대 글자 수 사용 시 -->
-				<p id="char_count_desc">이 게시판은 최소 <strong><?php echo $write_min; ?></strong>글자 이상, 최대 <strong><?php echo $write_max; ?></strong>글자 이하까지 글을 쓰실 수 있습니다.</p>
-				<?php } ?>
-				<?php echo $editor_html; // 에디터 사용시는 에디터로, 아니면 textarea 로 노출 ?>
-				<?php if($write_min || $write_max) { ?>
-				<!-- 최소/최대 글자 수 사용 시 -->
-				<div id="char_count_wrap"><span id="char_count"></span>글자</div>
-				<?php } ?>
-				<p class="ui-btn help">해시태그 : #해시태그내용 / 로그링크 : @로그번호 / 멤버알람 : [[닉네임]]</p>
+				<textarea name="wr_content" rows="5"><?=$write['wr_content']?></textarea>
+				<p class="ui-btn help">해시태그 : #해시태그내용 / 로그링크 : @로그번호</p>
 			</div>
 			
 			<hr class="padding" />
@@ -409,10 +225,6 @@ if(!$is_error) {
 				<button type="button" onclick="location.href='./board.php?bo_table=<?=$bo_table?>';" class="ui-btn">LIST</button>
 			</div>
 			</form>
-
-			<hr class="padding" />
-			<hr class="padding" />
-			<hr class="padding" />
 		</section>
 	<!-- } 게시물 작성/수정 끝 -->
 	</div>
@@ -445,8 +257,6 @@ if(!$is_error) {
 
 	function fwrite_submit(f)
 	{
-		<?php echo $editor_js; // 에디터 사용시 자바스크립트에서 내용을 폼필드로 넣어주며 내용이 입력되었는지 검사함   ?>
-
 		var subject = "";
 		var content = "";
 		$.ajax({
@@ -651,25 +461,6 @@ if(!$is_error) {
 </script>
 
 <script>
-$('#action').on('change', function() {
-	var view_idx = $(this).val();
-	$('.comment-data').removeClass('on');
-	$('#action_' + view_idx).addClass('on');
-});
-
-$('.change-thumb').on('change', function() {
-	var select_item = $(this).find('option:selected');
-
-	var thumb = select_item.data('thumb');
-
-	if(typeof(thumb) != "undefined") {
-		// 썸네일이 있는 경우
-		$(this).closest('.has-thumb').find('.ui-thumb').empty().append("<img src='"+thumb+"' alt='' />");
-	} else { 
-		$(this).closest('.has-thumb').find('.ui-thumb').empty();
-	}
-});
-
 
 $('#fwrite select').change(function() {
 	$('#fwrite select').find("option").attr('disabled', false);

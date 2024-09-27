@@ -24,6 +24,17 @@ for($i=0; $i < count($cs_name); $i++) {
 	if(is_array($cs_etc_9[$i]))		$cs_etc_9[$i] = "||".implode("||", $cs_etc_9[$i])."||";
 	if(is_array($cs_etc_10[$i]))	$cs_etc_10[$i] = "||".implode("||", $cs_etc_10[$i])."||";
 
+	if(is_array($cs_etc_11[$i]))	$cs_etc_11[$i] = "||".implode("||", $cs_etc_11[$i])."||";
+	if(is_array($cs_etc_12[$i]))	$cs_etc_12[$i] = "||".implode("||", $cs_etc_12[$i])."||";
+	if(is_array($cs_etc_13[$i]))	$cs_etc_13[$i] = "||".implode("||", $cs_etc_13[$i])."||";
+	if(is_array($cs_etc_14[$i]))	$cs_etc_14[$i] = "||".implode("||", $cs_etc_14[$i])."||";
+	if(is_array($cs_etc_15[$i]))	$cs_etc_15[$i] = "||".implode("||", $cs_etc_15[$i])."||";
+	if(is_array($cs_etc_16[$i]))	$cs_etc_16[$i] = "||".implode("||", $cs_etc_16[$i])."||";
+	if(is_array($cs_etc_17[$i]))	$cs_etc_17[$i] = "||".implode("||", $cs_etc_17[$i])."||";
+	if(is_array($cs_etc_18[$i]))	$cs_etc_18[$i] = "||".implode("||", $cs_etc_18[$i])."||";
+	if(is_array($cs_etc_19[$i]))	$cs_etc_19[$i] = "||".implode("||", $cs_etc_19[$i])."||";
+	if(is_array($cs_etc_20[$i]))	$cs_etc_20[$i] = "||".implode("||", $cs_etc_20[$i])."||";
+
 	// 이미지 등록 시, 이미지를 업로드한 뒤 - 해당 이미지 경로를 삽입
 	if ($_FILES['cs_value_file']['name'][$i]) {
 		// 확장자 따기
@@ -51,7 +62,17 @@ for($i=0; $i < count($cs_name); $i++) {
 						cs_etc_7	= '{$cs_etc_7[$i]}',
 						cs_etc_8	= '{$cs_etc_8[$i]}',
 						cs_etc_9	= '{$cs_etc_9[$i]}',
-						cs_etc_10	= '{$cs_etc_10[$i]}'
+						cs_etc_10	= '{$cs_etc_10[$i]}',
+						cs_etc_11	= '{$cs_etc_11[$i]}',
+						cs_etc_12	= '{$cs_etc_12[$i]}',
+						cs_etc_13	= '{$cs_etc_13[$i]}',
+						cs_etc_14	= '{$cs_etc_14[$i]}',
+						cs_etc_15	= '{$cs_etc_15[$i]}',
+						cs_etc_16	= '{$cs_etc_16[$i]}',
+						cs_etc_17	= '{$cs_etc_17[$i]}',
+						cs_etc_18	= '{$cs_etc_18[$i]}',
+						cs_etc_19	= '{$cs_etc_19[$i]}',
+						cs_etc_20	= '{$cs_etc_20[$i]}'
 					where cs_id = '{$de['cs_id']}'
 		";
 		sql_query($sql);
@@ -71,11 +92,35 @@ for($i=0; $i < count($cs_name); $i++) {
 						cs_etc_7	= '{$cs_etc_7[$i]}',
 						cs_etc_8	= '{$cs_etc_8[$i]}',
 						cs_etc_9	= '{$cs_etc_9[$i]}',
-						cs_etc_10	= '{$cs_etc_10[$i]}'";
+						cs_etc_10	= '{$cs_etc_10[$i]}',
+						cs_etc_11	= '{$cs_etc_11[$i]}',
+						cs_etc_12	= '{$cs_etc_12[$i]}',
+						cs_etc_13	= '{$cs_etc_13[$i]}',
+						cs_etc_14	= '{$cs_etc_14[$i]}',
+						cs_etc_15	= '{$cs_etc_15[$i]}',
+						cs_etc_16	= '{$cs_etc_16[$i]}',
+						cs_etc_17	= '{$cs_etc_17[$i]}',
+						cs_etc_18	= '{$cs_etc_18[$i]}',
+						cs_etc_19	= '{$cs_etc_19[$i]}',
+						cs_etc_20	= '{$cs_etc_20[$i]}'";
 		sql_query($sql);
 	}
 }
 
+$cf_add_fonts = '';
+if (isset($_POST['cf_add_fonts'])) {
+	$cf_add_fonts = substr(trim($_POST['cf_add_fonts']),0,65536);
+	$cf_add_fonts = preg_replace("#[\\\]+$#", "", $cf_add_fonts);
+}
+
+$cf_css_version = date('YmdHis');
+
+
+$sql = " update {$g5['config_table']}
+			set cf_add_fonts	= '{$cf_add_fonts}',
+				cf_css_version	= '{$cf_css_version}',
+				cf_add_script		= '{$_POST['cf_add_script']}'";
+sql_query($sql);
 
 
 // CSS 설정 파일 생성

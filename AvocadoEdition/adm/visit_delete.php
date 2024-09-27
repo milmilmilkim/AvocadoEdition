@@ -77,7 +77,10 @@ $now_year = (int)substr(G5_TIME_YMD, 0, 4);
 	</div>
 
 	<div class="btn_confirm01 btn_confirm">
-		<input type="submit" value="확인" class="btn_submit" accesskey="s">
+		<div class="btn">
+			<span class="material-icons">save</span>
+			<input type="submit" value="확인" class="btn_submit" accesskey="s">
+		</div>
 	</div>
 
 </form>

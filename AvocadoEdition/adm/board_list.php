@@ -51,8 +51,13 @@ $listall = '<a href="'.$_SERVER['SCRIPT_NAME'].'" class="ov_listall">전체목�
 $g5['title'] = '게시판관리';
 include_once('./admin.head.php');
 
-$colspan = 10;
+$colspan = 11;
 ?>
+
+<style>
+td input[type="text"],
+td select {display:block; width:100%;}
+</style>
 
 <div class="local_ov01 local_ov">
 	<?php echo $listall ?>
@@ -73,11 +78,8 @@ $colspan = 10;
 
 </form>
 
-<?php if ($is_admin == 'super') { ?>
-<div class="btn_add01 btn_add">
-	<a href="./board_form.php" id="bo_add">게시판 추가</a>
-</div>
-<?php } ?>
+<br />
+
 
 <form name="fboardlist" id="fboardlist" action="./board_list_update.php" onsubmit="return fboardlist_submit(this);" method="post">
 <input type="hidden" name="sst" value="<?php echo $sst ?>">
@@ -92,19 +94,19 @@ $colspan = 10;
 	<caption><?php echo $g5['title']; ?> 목록</caption>
 	<thead>
 	<tr>
-		<th scope="col">
-			<label for="chkall" class="sound_only">게시판 전체</label>
+		<th scope="col" style="width:45px;">
 			<input type="checkbox" name="chkall" value="1" id="chkall" onclick="check_all(this.form)">
 		</th>
-		<th scope="col"><?php echo subject_sort_link('a.gr_id') ?>그룹</a></th>
-		<th scope="col"><?php echo subject_sort_link('bo_table') ?>TABLE</a></th>
-		<th scope="col"><?php echo subject_sort_link('bo_skin', '', 'desc') ?>스킨</a></th>
+		<th scope="col" style="width:100px;"><?php echo subject_sort_link('a.gr_id') ?>그룹</a></th>
+		<th scope="col" style="width:100px;"><?php echo subject_sort_link('bo_table') ?>TABLE</a></th>
+		<th scope="col" style="width:150px;"><?php echo subject_sort_link('bo_skin', '', 'desc') ?>스킨</a></th>
 		<th scope="col"><?php echo subject_sort_link('bo_subject') ?>제목</a></th>
-		<th scope="col">읽기P<span class="sound_only">포인트</span></th>
-		<th scope="col">쓰기P<span class="sound_only">포인트</span></th>
-		<th scope="col">댓글P<span class="sound_only">포인트</span></th>
-		<th scope="col">다운P<span class="sound_only">포인트</span></th>
-		<th scope="col">관리</th>
+		<th scope="col" style="width:80px;">목록보기</th>
+		<th scope="col" style="width:80px;">글읽기</th>
+		<th scope="col" style="width:80px;">글쓰기</th>
+		<th scope="col" style="width:80px;">글답변</th>
+		<th scope="col" style="width:80px;">댓글쓰기</th>
+		<th scope="col" style="width:60px;">관리</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -118,7 +120,6 @@ $colspan = 10;
 
 	<tr class="<?php echo $bg; ?>">
 		<td>
-			<label for="chk_<?php echo $i; ?>" class="sound_only"><?php echo get_text($row['bo_subject']) ?></label>
 			<input type="checkbox" name="chk[]" value="<?php echo $i ?>" id="chk_<?php echo $i ?>">
 		</td>
 		<td>
@@ -133,28 +134,25 @@ $colspan = 10;
 			<a href="<?php echo G5_BBS_URL ?>/board.php?bo_table=<?php echo $row['bo_table'] ?>"><?php echo $row['bo_table'] ?></a>
 		</td>
 		<td>
-			<label for="bo_skin_<?php echo $i; ?>" class="sound_only">스킨</label>
 			<?php echo get_skin_select('board', 'bo_skin_'.$i, "bo_skin[$i]", $row['bo_skin']); ?>
 		</td>
 		<td>
-			<label for="bo_subject_<?php echo $i; ?>" class="sound_only">게시판 제목<strong class="sound_only"> 필수</strong></label>
 			<input type="text" name="bo_subject[<?php echo $i ?>]" value="<?php echo get_text($row['bo_subject']) ?>" id="bo_subject_<?php echo $i ?>" required class="required frm_input bo_subject full_input" size="25">
 		</td>
 		<td>
-			<label for="bo_read_point_<?php echo $i; ?>" class="sound_only">읽기 포인트</label>
-			<input type="text" name="bo_read_point[<?php echo $i ?>]" value="<?php echo $row['bo_read_point'] ?>" id="bo_read_point_<?php echo $i; ?>" class="frm_input" size="2">
+			<?php echo get_member_level_select('bo_list_level['.$i.']', 1, 10, $row['bo_list_level']) ?>
 		</td>
 		<td>
-			<label for="bo_write_point_<?php echo $i; ?>" class="sound_only">쓰기 포인트</label>
-			<input type="text" name="bo_write_point[<?php echo $i ?>]" value="<?php echo $row['bo_write_point'] ?>" id="bo_write_point_<?php echo $i; ?>" class="frm_input" size="2">
+			<?php echo get_member_level_select('bo_read_level['.$i.']', 1, 10, $row['bo_read_level']) ?>
 		</td>
 		<td>
-			<label for="bo_comment_point_<?php echo $i; ?>" class="sound_only">댓글 포인트</label>
-			<input type="text" name="bo_comment_point[<?php echo $i ?>]" value="<?php echo $row['bo_comment_point'] ?>" id="bo_comment_point_<?php echo $i; ?>" class="frm_input" size="2">
+			<?php echo get_member_level_select('bo_write_level['.$i.']', 1, 10, $row['bo_write_level']) ?>
 		</td>
 		<td>
-			<label for="bo_download_point_<?php echo $i; ?>" class="sound_only">다운 포인트</label>
-			<input type="text" name="bo_download_point[<?php echo $i ?>]" value="<?php echo $row['bo_download_point'] ?>" id="bo_download_point_<?php echo $i; ?>" class="frm_input" size="2">
+			<?php echo get_member_level_select('bo_reply_level['.$i.']', 1, 10, $row['bo_reply_level']) ?>
+		</td>
+		<td>
+			<?php echo get_member_level_select('bo_comment_level['.$i.']', 1, 10, $row['bo_comment_level']) ?>
 		</td>
 		<td>
 			<?php echo $one_update ?>
@@ -170,10 +168,18 @@ $colspan = 10;
 	</table>
 </div>
 
-<div class="btn_list01 btn_list">
-	<input type="submit" name="act_button" value="선택수정" onclick="document.pressed=this.value">
+
+<div class="btn_confirm">
+	<div class="btn ty3">
+		<span class="material-icons">build</span>
+		<input type="submit" name="act_button" value="선택수정" title="선택수정" onclick="document.pressed=this.value">
+	</div>
+	<div class="btn ty2">
+		<span class="material-icons">delete</span>
+		<input type="submit" name="act_button" value="선택삭제" title="선택삭제" onclick="document.pressed=this.value">
+	</div>
 	<?php if ($is_admin == 'super') { ?>
-	<input type="submit" name="act_button" value="선택삭제" onclick="document.pressed=this.value">
+		<a href="./board_form.php" title="게시판 추가" class="btn"><span class="material-icons">add</span></a>
 	<?php } ?>
 </div>
 

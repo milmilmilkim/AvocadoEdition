@@ -66,7 +66,7 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
 	<table>
 	<caption><?php echo $g5['title']; ?> 목록</caption>
 	<colgroup>
-		<col class="grid_4">
+		<col style="width:140px;">
 		<col>
 	</colgroup>
 	<tbody>
@@ -75,7 +75,7 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
 		<td>
 			<?php echo help('20자 이내의 영문자, 숫자, _ 만 가능합니다.'); ?>
 			<input type="text" value="<?php echo $co['co_id']; ?>" name="co_id" id ="co_id" required <?php echo $readonly; ?> class="required <?php echo $readonly; ?> frm_input" size="20" maxlength="20">
-			<?php if ($w == 'u') { ?><a href="<?php echo G5_BBS_URL; ?>/content.php?co_id=<?php echo $co_id; ?>" class="btn_frmline">내용확인</a><?php } ?>
+			<?php if ($w == 'u') { ?><a href="<?php echo G5_BBS_URL; ?>/content.php?co_id=<?php echo $co_id; ?>" target="_blank" class="btn_frmline">내용확인</a><?php } ?>
 		</td>
 	</tr>
 	<tr>
@@ -85,10 +85,6 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
 	<tr>
 		<th scope="row">내용</th>
 		<td><?php echo editor_html('co_content', get_text($co['co_content'], 0)); ?></td>
-	</tr>
-	<tr>
-		<th scope="row">모바일 내용</th>
-		<td><?php echo editor_html('co_mobile_content', get_text($co['co_mobile_content'], 0)); ?></td>
 	</tr>
 	<tr>
 		<th scope="row"><label for="co_skin">스킨 디렉토리<strong class="sound_only">필수</strong></label></th>
@@ -172,9 +168,13 @@ include_once (G5_ADMIN_PATH.'/admin.head.php');
 	</table>
 </div>
 
+
 <div class="btn_confirm01 btn_confirm">
-	<input type="submit" value="확인" class="btn_submit" accesskey="s">
-	<a href="./contentlist.php">목록</a>
+	<a href="./contentlist.php" title="목록" class="btn ty2"><span class="material-icons">list</span></a>
+	<div class="btn">
+		<span class="material-icons">save</span>
+		<input type="submit" value="확인" class="btn_submit" accesskey="s">
+	</div>
 </div>
 
 </form>
@@ -187,7 +187,6 @@ function frmcontentform_check(f)
 
 	<?php echo get_editor_js('co_content'); ?>
 	<?php echo chk_editor_js('co_content'); ?>
-	<?php echo get_editor_js('co_mobile_content'); ?>
 
 	check_field(f.co_id, "ID를 입력하세요.");
 	check_field(f.co_subject, "제목을 입력하세요.");

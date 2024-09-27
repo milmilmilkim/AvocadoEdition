@@ -54,41 +54,48 @@ $result = sql_query($sql);
     <span>전체 내용 <?php echo $total_count; ?>건</span>
 </div>
 
-<div class="btn_add01 btn_add">
-    <a href="./contentform.php">내용 추가</a>
+
+<div class="btn_confirm">
+	<a href="./contentform.php" class="btn"><span class="material-icons">add</span></a>
 </div>
 
+<br />
+
 <div class="tbl_head01 tbl_wrap">
-    <table>
-    <caption><?php echo $g5['title']; ?> 목록</caption>
-    <thead>
-    <tr>
-        <th scope="col">ID</th>
-        <th scope="col">제목</th>
-        <th scope="col">관리</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php for ($i=0; $row=sql_fetch_array($result); $i++) {
-        $bg = 'bg'.($i%2);
-    ?>
-    <tr class="<?php echo $bg; ?>">
-        <td class="td_id"><?php echo $row['co_id']; ?></td>
-        <td><?php echo htmlspecialchars2($row['co_subject']); ?></td>
-        <td class="td_mng">
-            <a href="./contentform.php?w=u&amp;co_id=<?php echo $row['co_id']; ?>"><span class="sound_only"><?php echo htmlspecialchars2($row['co_subject']); ?> </span>수정</a>
-            <a href="<?php echo G5_BBS_URL; ?>/content.php?co_id=<?php echo $row['co_id']; ?>"><span class="sound_only"><?php echo htmlspecialchars2($row['co_subject']); ?> </span> 보기</a>
-            <a href="./contentformupdate.php?w=d&amp;co_id=<?php echo $row['co_id']; ?>" onclick="return delete_confirm(this);"><span class="sound_only"><?php echo htmlspecialchars2($row['co_subject']); ?> </span>삭제</a>
-        </td>
-    </tr>
-    <?php
-    }
-    if ($i == 0) {
-        echo '<tr><td colspan="3" class="empty_table">자료가 한건도 없습니다.</td></tr>';
-    }
-    ?>
-    </tbody>
-    </table>
+	<table>
+	<caption><?php echo $g5['title']; ?> 목록</caption>
+	<thead>
+	<tr>
+		<th scope="col" style="width:100px;">ID</th>
+		<th scope="col">제목</th>
+		<th scope="col" style="width:100px;">미리보기</th>
+		<th scope="col" style="width:100px;">관리</th>
+	</tr>
+	</thead>
+	<tbody>
+	<?php for ($i=0; $row=sql_fetch_array($result); $i++) {
+		$bg = 'bg'.($i%2);
+	?>
+	<tr class="<?php echo $bg; ?>">
+		<td class="td_id"><?php echo $row['co_id']; ?></td>
+		<td><?php echo htmlspecialchars2($row['co_subject']); ?></td>
+		<td>
+			<a href="<?php echo G5_BBS_URL; ?>/content.php?co_id=<?php echo $row['co_id']; ?>" target="_blank"><span class="sound_only"><?php echo htmlspecialchars2($row['co_subject']); ?> </span> 보기</a>
+		</td>
+		<td class="td_mng">
+			<a href="./contentform.php?w=u&amp;co_id=<?php echo $row['co_id']; ?>"><span class="sound_only"><?php echo htmlspecialchars2($row['co_subject']); ?> </span>수정</a>
+			&nbsp;
+			<a href="./contentformupdate.php?w=d&amp;co_id=<?php echo $row['co_id']; ?>" onclick="return delete_confirm(this);"><span class="sound_only"><?php echo htmlspecialchars2($row['co_subject']); ?> </span>삭제</a>
+		</td>
+	</tr>
+	<?php
+	}
+	if ($i == 0) {
+		echo '<tr><td colspan="4" class="empty_table">자료가 한건도 없습니다.</td></tr>';
+	}
+	?>
+	</tbody>
+	</table>
 </div>
 
 <?php echo get_paging(G5_IS_MOBILE ? $config['cf_mobile_pages'] : $config['cf_write_pages'], $page, $total_page, "{$_SERVER['SCRIPT_NAME']}?$qstr&amp;page="); ?>

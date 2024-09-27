@@ -76,11 +76,7 @@ $colspan = 10;
 </fieldset>
 </form>
 
-<?php if ($is_admin == 'super') { ?>
-<div class="btn_add01 btn_add sort_with">
-    <a href="./boardgroup_form.php" id="bo_gr_add">게시판그룹 추가</a>
-</div>
-<?php } ?>
+<br />
 
 <form name="fboardgrouplist" id="fboardgrouplist" action="./boardgroup_list_update.php" onsubmit="return fboardgrouplist_submit(this);" method="post">
 <input type="hidden" name="sst" value="<?php echo $sst ?>">
@@ -173,13 +169,22 @@ $colspan = 10;
     </table>
 </div>
 
-<div class="btn_list01 btn_list">
-    <input type="submit" name="act_button" onclick="document.pressed=this.value" value="선택수정">
-    <input type="submit" name="act_button" onclick="document.pressed=this.value" value="선택삭제">
-    <a href="./boardgroup_form.php">게시판그룹 추가</a>
+<div class="btn_confirm">
+	<div class="btn ty3">
+		<span class="material-icons">build</span>
+		<input type="submit" name="act_button" value="선택수정" title="선택수정" onclick="document.pressed=this.value">
+	</div>
+	<div class="btn ty2">
+		<span class="material-icons">delete</span>
+		<input type="submit" name="act_button" value="선택삭제" title="선택삭제" onclick="document.pressed=this.value">
+	</div>
+	<?php if ($is_admin == 'super') { ?>
+		<a href="./boardgroup_form.php" title="게시판그룹 추가" class="btn"><span class="material-icons">add</span></a>
+	<?php } ?>
 </div>
-</form>
 
+</form>
+<br />
 <div class="local_desc01 local_desc">
     <p>
         접근사용 옵션을 설정하시면 관리자가 지정한 회원만 해당 그룹에 접근할 수 있습니다.<br>

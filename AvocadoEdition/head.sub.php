@@ -3,12 +3,6 @@
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 check_site_auth($is_member);
 
-// 테마 head.sub.php 파일
-if(!defined('G5_IS_ADMIN') && defined('G5_THEME_PATH') && is_file(G5_THEME_PATH.'/head.sub.php')) {
-    require_once(G5_THEME_PATH.'/head.sub.php');
-    return;
-}
-
 $g5_debug['php']['begin_time'] = $begin_time = get_microtime();
 
 if (!isset($g5['title'])) {
@@ -70,16 +64,16 @@ if($config['cf_add_meta'])
 <? } ?>
 
 <title><?php echo $g5_head_title; ?></title>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
 <?
 if (defined('G5_IS_ADMIN')) {
 	echo '<link rel="stylesheet" href="'.G5_ADMIN_URL.'/css/admin.css" type="text/css">'.PHP_EOL;
 	echo '<link rel="stylesheet" href="'.G5_ADMIN_URL.'/css/admin.layout.css" type="text/css">'.PHP_EOL;
 } else {
 	echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/default.css" type="text/css">'.PHP_EOL;
-	if(!$config['cf_7']) { 
-		echo '<link rel="stylesheet" href="'.G5_DATA_URL.'/css/_design.config.css" type="text/css" />';
-	}
 	echo '<link rel="stylesheet" href="'.G5_CSS_URL.'/style.css" type="text/css">'.PHP_EOL;
+	echo '<link rel="stylesheet" href="'.G5_DATA_URL.'/css/_design.config.css?v='.$config['cf_css_version'].'" type="text/css" />';
 }
 ?>
 
@@ -92,6 +86,13 @@ if (defined('G5_IS_ADMIN')) {
 <script src="<?php echo G5_JS_URL ?>/html5.js"></script>
 <![endif]-->
 <script>
+
+<? if($config['cf_use_http']) { ?>
+if (window.location.protocol == "https:")
+	location.href = location.href.replace(/^https:/, 'http:')
+<? } ?>
+
+
 // 자바스크립트에서 사용하는 전역변수 선언
 var g5_url       = "<?php echo G5_URL ?>";
 var g5_bbs_url   = "<?php echo G5_BBS_URL ?>";
@@ -129,5 +130,11 @@ if(!defined('G5_IS_ADMIN'))
 <script>
 if(!parent || parent==this) $('html').addClass('single'); 
 </script>
+
+<? if($config['cf_cursor']) { ?>
+<style>
+* {cursor: url(<?=$config['cf_cursor']?>) 0 0, auto;}
+</style>
+<? } ?>
 </head>
 <body>

@@ -86,8 +86,8 @@ if ($w == '') {
 	$required_valid = 'alnum_';
 	$sound_only = '<strong class="sound_only">필수</strong>';
 
-	$board['bo_count_delete'] = 1;
-	$board['bo_count_modify'] = 1;
+	$board['bo_count_delete'] = 0;
+	$board['bo_count_modify'] = 0;
 	$board['bo_read_point'] = $config['cf_read_point'];
 	$board['bo_write_point'] = $config['cf_write_point'];
 	$board['bo_comment_point'] = $config['cf_comment_point'];
@@ -102,7 +102,7 @@ if ($w == '') {
 	$board['bo_new'] = 24;
 	$board['bo_hot'] = 100;
 	$board['bo_image_width'] = 600;
-	$board['bo_upload_count'] = 1;
+	$board['bo_upload_count'] = 0;
 	$board['bo_upload_size'] = (int)ini_get("upload_max_filesize") * 1048576;
 	$board['bo_reply_order'] = 1;
 	$board['bo_use_search'] = 1;
@@ -142,17 +142,9 @@ $pg_anchor = '<ul class="anchor">
 	<li><a href="#anc_002">권한 설정</a></li>
 	<li><a href="#anc_003">기능 설정</a></li>
 	<li><a href="#anc_004">디자인/양식</a></li>
-	<li><a href="#anc_005">포인트 설정</a></li>
 	<li><a href="#anc_006">여분필드</a></li>
 </ul>';
 
-$frm_submit = '<div class="btn_confirm01 btn_confirm">
-	<input type="submit" value="확인" class="btn_submit" accesskey="s">
-	<a href="./board_list.php?'.$qstr.'">목록</a>'.PHP_EOL;
-if ($w == 'u') $frm_submit .= '<a href="./board_copy.php?bo_table='.$bo_table.'" id="board_copy" target="win_board_copy">게시판복사</a>
-	<a href="'.G5_BBS_URL.'/board.php?bo_table='.$board['bo_table'].'" class="btn_frmline">게시판 바로가기</a>
-	<a href="./board_thumbnail_delete.php?bo_table='.$board['bo_table'].'&amp;'.$qstr.'" onclick="return delete_confirm2(\'게시판 썸네일 파일을 삭제하시겠습니까?\');">게시판 썸네일 삭제</a>'.PHP_EOL;
-$frm_submit .= '</div>';
 ?>
 
 <form name="fboardform" id="fboardform" action="./board_form_update.php" onsubmit="return fboardform_submit(this)" method="post" enctype="multipart/form-data">
@@ -175,6 +167,18 @@ $frm_submit .= '</div>';
 <input type="hidden" name="bo_mobile_subject_len" value="120">
 <input type="hidden" name="bo_hot" value="0">
 
+<input type="hidden" name="bo_count_modify" value="<?php echo $board['bo_count_modify'] ?>" />
+<input type="hidden" name="bo_count_delete" value="<?php echo $board['bo_count_delete'] ?>" />
+<input type="hidden" name="bo_new" value="<?php echo $board['bo_new'] ?>" />
+<input type="hidden" name="bo_reply_order" value="<?php echo $board['bo_reply_order'] ?>" />
+
+<div class="btn_confirm01 btn_confirm">
+	<a href="./board_list.php" title="목록" class="btn ty2"><span class="material-icons">list</span></a>
+	<div class="btn">
+		<span class="material-icons">save</span>
+		<input type="submit" value="확인" class="btn_submit" accesskey="s">
+	</div>
+</div>
 
 <section id="anc_001">
 	<h2 class="h2_frm">게시판 기본 설정</h2>
@@ -251,8 +255,6 @@ $frm_submit .= '</div>';
 		</table>
 	</div>
 </section>
-
-<?php echo $frm_submit; ?>
 
 <section id="anc_002">
 	<h2 class="h2_frm">게시판 권한 설정</h2>
@@ -332,8 +334,6 @@ $frm_submit .= '</div>';
 	</div>
 </section>
 
-<?php echo $frm_submit; ?>
-
 <section id="anc_003">
 	<h2 class="h2_frm">게시판 기능 설정</h2>
 	<?php echo $pg_anchor ?>
@@ -347,31 +347,7 @@ $frm_submit .= '</div>';
 			<col style="width: 180px;">
 		</colgroup>
 		<tbody>
-		<tr>
-			<th scope="row"><label for="bo_count_modify">원글 수정 불가<strong class="sound_only">필수</strong></label></th>
-			<td>
-				 <?php echo help('댓글의 수가 설정 수 이상이면 원글을 수정할 수 없습니다. 0으로 설정하시면 댓글 수에 관계없이 수정할 수있습니다.'); ?>
-				댓글 <input type="text" name="bo_count_modify" value="<?php echo $board['bo_count_modify'] ?>" id="bo_count_modify" required class="required numeric frm_input" size="3">개 이상 달리면 수정불가
-			</td>
-			<td class="td_grpset">
-				<input type="checkbox" name="chk_grp_count_modify" value="1" id="chk_grp_count_modify">
-				<label for="chk_grp_count_modify">그룹적용</label>
-				<input type="checkbox" name="chk_all_count_modify" value="1" id="chk_all_count_modify">
-				<label for="chk_all_count_modify">전체적용</label>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="bo_count_delete">원글 삭제 불가<strong class="sound_only">필수</strong></label></th>
-			<td>
-				댓글 <input type="text" name="bo_count_delete" value="<?php echo $board['bo_count_delete'] ?>" id="bo_count_delete" required class="required numeric frm_input" size="3">개 이상 달리면 삭제불가
-			</td>
-			<td class="td_grpset">
-				<input type="checkbox" name="chk_grp_count_delete" value="1" id="chk_grp_count_delete">
-				<label for="chk_grp_count_delete">그룹적용</label>
-				<input type="checkbox" name="chk_all_count_delete" value="1" id="chk_all_count_delete">
-				<label for="chk_all_count_delete">전체적용</label>
-			</td>
-		</tr>
+		
 		<tr>
 			<th scope="row"><label for="bo_use_secret">비밀글 사용</label></th>
 			<td>
@@ -389,22 +365,7 @@ $frm_submit .= '</div>';
 				<label for="chk_all_use_secret">전체적용</label>
 			</td>
 		</tr>
-		<tr>
-			<th scope="row"><label for="bo_use_chick">췩(이미지 선업로드) 사용</label></th>
-			<td>
-				<input type="checkbox" name="bo_use_chick" value="1" <?php echo $board['bo_use_chick']?'checked':''; ?> id="bo_use_chick">
-				사용
-			</td>
-			<td class="td_grpset"></td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="bo_use_noname">익명 사용</label></th>
-			<td>
-				<input type="checkbox" name="bo_use_noname" value="1" <?php echo $board['bo_use_noname']?'checked':''; ?> id="bo_use_noname">
-				사용
-			</td>
-			<td class="td_grpset"></td>
-		</tr>
+		
 		<tr>
 			<th scope="row"><label for="bo_use_dhtml_editor">DHTML 에디터 사용</label></th>
 			<td>
@@ -420,34 +381,6 @@ $frm_submit .= '</div>';
 			</td>
 		</tr>
 		
-		<tr>
-			<th scope="row"><label for="bo_use_list_content">목록에서 내용 사용</label></th>
-			<td>
-				<?php echo help("목록에서 게시판 제목외에 내용도 읽어와야 할 경우에 설정하는 옵션입니다. 기본은 사용하지 않습니다."); ?>
-				<input type="checkbox" name="bo_use_list_content" value="1" id="bo_use_list_content" <?php echo $board['bo_use_list_content']?'checked':''; ?>>
-				사용 (사용시 속도가 느려질 수 있습니다.)
-			</td>
-			<td class="td_grpset">
-				<input type="checkbox" name="chk_grp_use_list_content" value="1" id="chk_grp_use_list_content">
-				<label for="chk_grp_use_list_content">그룹적용</label>
-				<input type="checkbox" name="chk_all_use_list_content" value="1" id="chk_all_use_list_content">
-				<label for="chk_all_use_list_content">전체적용</label>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="bo_use_list_file">목록에서 파일 사용</label></th>
-			<td>
-				<?php echo help("목록에서 게시판 첨부파일을 읽어와야 할 경우에 설정하는 옵션입니다. 기본은 사용하지 않습니다."); ?>
-				<input type="checkbox" name="bo_use_list_file" value="1" id="bo_use_list_file" <?php echo $board['bo_use_list_file']?'checked':''; ?>>
-				사용 (사용시 속도가 느려질 수 있습니다.)
-			</td>
-			<td class="td_grpset">
-				<input type="checkbox" name="chk_grp_use_list_file" value="1" id="chk_grp_use_list_file">
-				<label for="chk_grp_use_list_file">그룹적용</label>
-				<input type="checkbox" name="chk_all_use_list_file" value="1" id="chk_all_use_list_file">
-				<label for="chk_all_use_list_file">전체적용</label>
-			</td>
-		</tr>
 		<tr>
 			<th scope="row"><label for="bo_use_list_view">전체목록보이기 사용</label></th>
 			<td>
@@ -488,65 +421,11 @@ $frm_submit .= '</div>';
 				<label for="chk_all_upload_size">전체적용</label>
 			</td>
 		</tr>
-		<tr>
-			<th scope="row"><label for="bo_write_min">최소 글수 제한</label></th>
-			<td>
-				<?php echo help('글 입력시 최소 글자수를 설정. 0을 입력하거나 최고관리자, DHTML 에디터 사용시에는 검사하지 않음') ?>
-				<input type="text" name="bo_write_min" value="<?php echo $board['bo_write_min'] ?>" id="bo_write_min" class="numeric frm_input" size="4">
-			</td>
-			<td class="td_grpset">
-				<input type="checkbox" name="chk_grp_write_min" value="1" id="chk_grp_write_min">
-				<label for="chk_grp_write_min">그룹적용</label>
-				<input type="checkbox" name="chk_all_write_min" value="1" id="chk_all_write_min">
-				<label for="chk_all_write_min">전체적용</label>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="bo_write_max">최대 글수 제한</label></th>
-			<td>
-				<?php echo help('글 입력시 최대 글자수를 설정. 0을 입력하거나 최고관리자, DHTML 에디터 사용시에는 검사하지 않음') ?>
-				<input type="text" name="bo_write_max" value="<?php echo $board['bo_write_max'] ?>" id="bo_write_max" class="numeric frm_input" size="4">
-			</td>
-			<td class="td_grpset">
-				<input type="checkbox" name="chk_grp_write_max" value="1" id="chk_grp_write_max">
-				<label for="chk_grp_write_max">그룹적용</label>
-				<input type="checkbox" name="chk_all_write_max" value="1" id="chk_all_write_max">
-				<label for="chk_all_write_max">전체적용</label>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="bo_comment_min">최소 댓글수 제한</label></th>
-			<td>
-				<?php echo help('댓글 입력시 최소 글자수를 설정. 0을 입력하면 검사하지 않음') ?>
-				<input type="text" name="bo_comment_min" value="<?php echo $board['bo_comment_min'] ?>" id="bo_comment_min" class="numeric frm_input" size="4">
-			</td>
-			<td class="td_grpset">
-				<input type="checkbox" name="chk_grp_comment_min" value="1" id="chk_grp_comment_min">
-				<label for="chk_grp_comment_min">그룹적용</label>
-				<input type="checkbox" name="chk_all_comment_min" value="1" id="chk_all_comment_min">
-				<label for="chk_all_comment_min">전체적용</label>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="bo_comment_max">최대 댓글수 제한</label></th>
-			<td>
-				<?php echo help('댓글 입력시 최대 글자수를 설정. 0을 입력하면 검사하지 않음') ?>
-				<input type="text" name="bo_comment_max" value="<?php echo $board['bo_comment_max'] ?>" id="bo_comment_max" class="numeric frm_input" size="4">
-			</td>
-			<td class="td_grpset">
-				<input type="checkbox" name="chk_grp_comment_max" value="1" id="chk_grp_comment_max">
-				<label for="chk_grp_comment_max">그룹적용</label>
-				<input type="checkbox" name="chk_all_comment_max" value="1" id="chk_all_comment_max">
-				<label for="chk_all_comment_max">전체적용</label>
-			</td>
-		</tr>
 
 		</tbody>
 		</table>
 	</div>
 </section>
-
-<?php echo $frm_submit; ?>
 
 <section id="anc_004">
 	<h2 class="h2_frm">게시판 디자인/양식</h2>
@@ -636,7 +515,20 @@ $frm_submit .= '</div>';
 			</td>
 		</tr>
 		
-		
+		<tr>
+			<th scope="row"><label for="bo_image_width">이미지 폭 크기<strong class="sound_only">필수</strong></label></th>
+			<td>
+				<?php echo help('일반 게시판에서 출력되는 이미지의 폭 크기') ?>
+				<input type="text" name="bo_image_width" value="<?php echo $board['bo_image_width'] ?>" id="bo_image_width" required class="required numeric frm_input" size="4"> 픽셀
+			</td>
+			<td class="td_grpset">
+				<input type="checkbox" name="chk_grp_image_width" value="1" id="chk_grp_image_width">
+				<label for="chk_grp_image_width">그룹적용</label>
+				<input type="checkbox" name="chk_all_image_width" value="1" id="chk_all_image_width">
+				<label for="chk_all_image_width">전체적용</label>
+			</td>
+		</tr>
+
 		<tr>
 			<th scope="row"><label for="bo_gallery_height">로그접기 세로기준<strong class="sound_only">필수</strong></label></th>
 			<td>
@@ -651,48 +543,6 @@ $frm_submit .= '</div>';
 			</td>
 		</tr>
 		
-		<tr>
-			<th scope="row"><label for="bo_image_width">이미지 폭 크기<strong class="sound_only">필수</strong></label></th>
-			<td>
-				<?php echo help('일반 게시판에서 출력되는 이미지의 폭 크기') ?>
-				<input type="text" name="bo_image_width" value="<?php echo $board['bo_image_width'] ?>" id="bo_image_width" required class="required numeric frm_input" size="4"> 픽셀
-			</td>
-			<td class="td_grpset">
-				<input type="checkbox" name="chk_grp_image_width" value="1" id="chk_grp_image_width">
-				<label for="chk_grp_image_width">그룹적용</label>
-				<input type="checkbox" name="chk_all_image_width" value="1" id="chk_all_image_width">
-				<label for="chk_all_image_width">전체적용</label>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="bo_new">새글 아이콘<strong class="sound_only">필수</strong></label></th>
-			<td>
-				<?php echo help('글 입력후 new 이미지를 출력하는 시간. 0을 입력하시면 아이콘을 출력하지 않습니다.') ?>
-				<input type="text" name="bo_new" value="<?php echo $board['bo_new'] ?>" id="bo_new" required class="required numeric frm_input" size="4">
-			</td>
-			<td class="td_grpset">
-				<input type="checkbox" name="chk_grp_new" value="1" id="chk_grp_new">
-				<label for="chk_grp_new">그룹적용</label>
-				<input type="checkbox" name="chk_all_new" value="1" id="chk_all_new">
-				<label for="chk_all_new">전체적용</label>
-			</td>
-		</tr>
-		
-		<tr>
-			<th scope="row"><label for="bo_reply_order">답변 달기</label></th>
-			<td>
-				<select id="bo_reply_order" name="bo_reply_order">
-					<option value="1"<?php echo get_selected($board['bo_reply_order'], 1, true); ?>>나중에 쓴 답변 아래로 달기 (기본)
-					<option value="0"<?php echo get_selected($board['bo_reply_order'], 0); ?>>나중에 쓴 답변 위로 달기
-				</select>
-			</td>
-			<td class="td_grpset">
-				<input type="checkbox" id="chk_grp_reply_order" name="chk_grp_reply_order" value="1">
-				<label for="chk_grp_reply_order">그룹적용</label>
-				<input type="checkbox" id="chk_all_reply_order" name="chk_all_reply_order" value="1">
-				<label for="chk_all_reply_order">전체적용</label>
-			</td>
-		</tr>
 		<tr>
 			<th scope="row"><label for="bo_sort_field">리스트 정렬 필드</label></th>
 			<td>
@@ -730,72 +580,6 @@ $frm_submit .= '</div>';
 	</div>
 </section>
 
-<?php echo $frm_submit; ?>
-
-<section id="anc_005">
-	<h2 class="h2_frm">게시판 포인트 설정</h2>
-	<?php echo $pg_anchor ?>
-
-	<div class="tbl_frm01 tbl_wrap">
-		<table>
-		<caption>게시판 포인트 설정</caption>
-		<colgroup>
-			<col style="width: 150px;">
-			<col>
-			<col style="width: 180px;">
-		</colgroup>
-		<tbody>
-		<tr>
-			<th scope="row"><label for="chk_grp_point">기본값으로 설정</label></th>
-			<td colspan="2">
-				<?php echo help('환경설정에 입력된 포인트로 설정') ?>
-				<input type="checkbox" name="chk_grp_point" id="chk_grp_point" onclick="set_point(this.form)">
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="bo_read_point">글읽기 포인트<strong class="sound_only">필수</strong></label></th>
-			<td>
-				<input type="text" name="bo_read_point" value="<?php echo $board['bo_read_point'] ?>" id="bo_read_point" required class="required frm_input" size="5">
-			</td>
-			<td class="td_grpset">
-				<input type="checkbox" name="chk_grp_read_point" value="1" id="chk_grp_read_point">
-				<label for="chk_grp_read_point">그룹적용</label>
-				<input type="checkbox" name="chk_all_read_point" value="1" id="chk_all_read_point">
-				<label for="chk_all_read_point">전체적용</label>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="bo_write_point">글쓰기 포인트<strong class="sound_only">필수</strong></label></th>
-			<td>
-				<input type="text" name="bo_write_point" value="<?php echo $board['bo_write_point'] ?>" id="bo_write_point" required class="required frm_input" size="5">
-			</td>
-			<td class="td_grpset">
-				<input type="checkbox" name="chk_grp_write_point" value="1" id="chk_grp_write_point">
-				<label for="chk_grp_write_point">그룹적용</label>
-				<input type="checkbox" name="chk_all_write_point" value="1" id="chk_all_write_point">
-				<label for="chk_all_write_point">전체적용</label>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="bo_comment_point">댓글쓰기 포인트<strong class="sound_only">필수</strong></label></th>
-			<td>
-				<input type="text" name="bo_comment_point" value="<?php echo $board['bo_comment_point'] ?>" id="bo_comment_point" required class="required frm_input" size="5">
-			</td>
-			<td class="td_grpset">
-				<input type="checkbox" name="chk_grp_comment_point" value="1" id="chk_grp_comment_point">
-				<label for="chk_grp_comment_point">그룹적용</label>
-				<input type="checkbox" name="chk_all_comment_point" value="1" id="chk_all_comment_point">
-				<label for="chk_all_comment_point">전체적용</label>
-			</td>
-		</tr>
-		
-		</tbody>
-		</table>
-	</div>
-</section>
-
-<?php echo $frm_submit; ?>
-
 <section id="anc_006">
 	<h2 class="h2_frm">게시판 여분필드 설정</h2>
 	<?php echo $pg_anchor ?>
@@ -830,8 +614,6 @@ $frm_submit .= '</div>';
 		</table>
 	</div>
 </section>
-
-<?php echo $frm_submit; ?>
 
 </form>
 

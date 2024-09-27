@@ -21,11 +21,11 @@ function autolink($str, $bo_table, $stx='')
 
 	// 해시태그 설정
 	$hash_pattern = "/\\#([0-9a-zA-Z가-힣_])([0-9a-zA-Z가-힣_]*)/";
-	$str = preg_replace($hash_pattern, '<a href="?bo_table='.$bo_table.'&amp;hash=%23$1$2" class="link_hash_tag">&#35;$1$2</a>', $str);
+	$str = preg_replace($hash_pattern, '<a href="?bo_table='.$bo_table.'&amp;sfl=hash&amp;stx=%23$1$2" class="link_hash_tag">&#35;$1$2</a>', $str);
 
 	// 로그링크 설정
 	$log_pattern = "/\\@([0-9])([0-9]*)/";
-	$str = preg_replace($log_pattern, '<a href="?bo_table='.$bo_table.'&amp;log=$1$2&amp;single=Y" target="_blank" class="log_link_tag">$1$2</a>', $str);
+	$str = preg_replace($log_pattern, '<a href="?bo_table='.$bo_table.'&amp;sfl=log&amp;stx=$1$2&amp;single=Y" target="_blank" class="log_link_tag">$1$2</a>', $str);
 
 	// 콜링 설정
 	$str = str_replace("[[", "<span class='member_call'>", $str);
@@ -34,36 +34,19 @@ function autolink($str, $bo_table, $stx='')
 	return $str;
 }
 
-function get_sql_search_mmb($search_ca_name, $search_field, $search_text, $search_hash, $search_operator='and', $log_num = '', $single_use= '')
+function get_sql_search_mmb($search_ca_name, $search_field, $search_text, $search_operator='and', $single_use= '')
 {
 	global $g5;
 
-	$str = " wr_ing = 0 ";
-	if ($search_ca_name) {
-		if($str) $str .= " and ";
-		$str .= " ca_name = '$search_ca_name' ";
-	}
-
-	if($search_hash) {
-		if($str) $str .= " and ";
-		$str .= "wr_content like '%{$search_hash}%' ";
-	}
-
-	if($log_num) { 
-		if($str) $str .= " and ";
-		$str .= "wr_num >= ".($log_num * -1)." ";
-
-		if($single_use) { 
-			if($str) $str .= " and ";
-			$str .= "wr_num < ".(($log_num * -1) + 1)." ";
-		}
-	}
+	$str = "";
+	if ($search_ca_name)
+		$str = " ca_name = '$search_ca_name' ";
 
 	$search_text = strip_tags(($search_text));
 	$search_text = trim(stripslashes($search_text));
 
 	if (!$search_text) {
-		if ($search_ca_name || $search_hash || $log_num) {
+		if ($search_ca_name) {
 			return $str;
 		} else {
 			return '0';
@@ -111,15 +94,7 @@ function get_sql_search_mmb($search_ca_name, $search_field, $search_text, $searc
 			switch ($field[$k]) {
 				case "mb_id" :
 				case "wr_name" :
-					$str .= " ( $field[$k] = '$s[$i]' ";
-					$str .= " and wr_noname = '0' ) ";
-					break;
-				case "wr_subject" : 
-					if (preg_match("/[a-zA-Z]/", $search_str))
-						$str .= "( INSTR(LOWER($field[$k]), LOWER('$search_str')) and wr_noname = '0' )";
-					else
-						$str .= "( $field[$k] like '%{$search_str}%' and wr_noname = '0' )";
-
+					$str .= " $field[$k] = '$s[$i]' ";
 					break;
 				case "wr_hit" :
 				case "wr_good" :
@@ -134,12 +109,24 @@ function get_sql_search_mmb($search_ca_name, $search_field, $search_text, $searc
 				case "wr_password" :
 					$str .= "1=0"; // 항상 거짓
 					break;
+				case "hash" : 
+					// 해시태그 검색
+					$str .= "wr_content like '%{$search_str}%' ";
+					break;
+				case "log" : 
+					// 로그 검색
+					$str .= "wr_num >= ".($search_str * -1)." ";
+					if($single_use) { 
+						if($str) $str .= " and ";
+						$str .= "wr_num < ".(($search_str * -1) + 1)." ";
+					}
+					break;
 				// LIKE 보다 INSTR 속도가 빠름
 				default :
 					if (preg_match("/[a-zA-Z]/", $search_str))
 						$str .= "INSTR(LOWER($field[$k]), LOWER('$search_str'))";
 					else
-						$str .= "$field[$k] like '%{$search_str}%'";
+						$str .= "INSTR($field[$k], '$search_str')";
 					break;
 			}
 			$op2 = " or ";

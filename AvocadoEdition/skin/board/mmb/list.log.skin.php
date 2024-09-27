@@ -61,13 +61,13 @@ if($is_viewer) {
 				$ori = explode("/", $thumb['ori']);
 				$ori = $ori[count($ori) -1];
 				$image_url = '<a href="'.G5_BBS_URL.'/view_image.php?bo_table='.$board['bo_table'].'&amp;fn='.urlencode($ori).'" target="_blank" class="view_image">';
-				$image_url .= '<img src="'.$thumb['src'].'" alt="'.$content.'" '.$attr.'>';
+				$image_url .= '<img src="'.$thumb['src'].'" >';
 				$image_url .= '</a>';
 				$image_width = $thumb['width'];
 				$image_height = $thumb['height'];
 			} else if($list_item['wr_type'] == 'URL') {
 				$image_url = '<a href="'.$list_item['wr_url'].'" target="_blank" class="view_image">';
-				$image_url .= '<img src="'.$list_item['wr_url'].'" alt="'.$content.'" '.$attr.'>';
+				$image_url .= '<img src="'.$list_item['wr_url'].'" >';
 				$image_url .= '</a>';
 			}
 		} else {
@@ -123,7 +123,6 @@ sql_query("update {$g5['call_table']} set bc_check = 1 where re_mb_id = '{$membe
 					// -- 버튼 영역 출력
 					if ($delete_href)		{ ?><a href="<?php echo $delete_href ?>" class="del" onclick="del(this.href); return false;">삭제</a><?	} ?>
 												<a href="?bo_table=<?=$bo_table?>&log=<?=$list_item['wr_num'] * -1?>&single=Y" target="_blank" class="new">로그링크</a>
-					<? if($is_member)		{ ?><a href="#" data-idx='<?=$list_item['wr_id']?>' data-function="favorite" class="fav <?=$is_favorite ? "on" : ""?>">관심</a><? } ?>
 					<? if ($update_href)	{ ?><a href="<?php echo $update_href ?>" class="mod">수정</a><? } ?>
 				<? } ?>
 			</div>

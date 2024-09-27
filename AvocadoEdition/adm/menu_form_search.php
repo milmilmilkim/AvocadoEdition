@@ -35,45 +35,45 @@ if($sql) {
 ?>
 
 <div class="tbl_head01 tbl_wrap">
-    <table>
-    <thead>
-    <tr>
-        <th scope="col">제목</th>
-        <th scope="col">선택</th>
-    </tr>
-    </thead>
-    <tbody>
+	<table>
+	<thead>
+	<tr>
+		<th scope="col">제목</th>
+		<th scope="col" style="width:80px;">선택</th>
+	</tr>
+	</thead>
+	<tbody>
 
 <?php }
-        switch($type) {
-            case 'group':
-                $link = G5_BBS_URL.'/group.php?gr_id='.$row['id'];
-                break;
-            case 'board':
-                $link = G5_BBS_URL.'/board.php?bo_table='.$row['id'];
-                break;
-            case 'content':
-                $link = G5_BBS_URL.'/content.php?co_id='.$row['id'];
-                break;
-            default:
-                $link = '';
-                break;
-        }
+		switch($type) {
+			case 'group':
+				$link = G5_BBS_URL.'/group.php?gr_id='.$row['id'];
+				break;
+			case 'board':
+				$link = G5_BBS_URL.'/board.php?bo_table='.$row['id'];
+				break;
+			case 'content':
+				$link = G5_BBS_URL.'/content.php?co_id='.$row['id'];
+				break;
+			default:
+				$link = '';
+				break;
+		}
 ?>
 
-    <tr>
-        <td><?php echo $row['subject']; ?></td>
-        <td class="td_mngsmall">
-            <input type="hidden" name="subject[]" value="<?php echo preg_replace('/[\'\"]/', '', $row['subject']); ?>">
-            <input type="hidden" name="link[]" value="<?php echo $link; ?>">
-            <button type="button" class="add_select"><span class="sound_only"><?php echo $row['subject']; ?> </span>선택</button>
-        </td>
-    </tr>
+	<tr>
+		<td><?php echo $row['subject']; ?></td>
+		<td class="td_mngsmall">
+			<input type="hidden" name="subject[]" value="<?php echo preg_replace('/[\'\"]/', '', $row['subject']); ?>">
+			<input type="hidden" name="link[]" value="<?php echo $link; ?>">
+			<button type="button" class="add_select"><span class="sound_only"><?php echo $row['subject']; ?> </span>선택</button>
+		</td>
+	</tr>
 
 <?php } ?>
 
-    </tbody>
-    </table>
+	</tbody>
+	</table>
 </div>
 
 <div class="btn_win02 btn_win">
@@ -85,7 +85,7 @@ if($sql) {
 <div class="tbl_frm01 tbl_wrap">
     <table>
     <colgroup>
-        <col class="grid_2">
+        <col style="width:100px;">
         <col>
     </colgroup>
     <tbody>

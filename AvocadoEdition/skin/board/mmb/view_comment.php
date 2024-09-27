@@ -5,7 +5,7 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 $comment = array();
 
 $is_comment_write = false;
-if ($member['mb_level'] >= $board['bo_comment_level'])
+if ($member['mb_level'] >= $board['bo_comment_level'] && $is_member)
 	$is_comment_write = true;
 
 // 코멘트 출력
