@@ -1,8 +1,7 @@
 @charset "utf-8";
 @font-face {
   font-family: 'PyeongChangPeace-Light';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Light.woff2')
-    format('woff2');
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
 }
@@ -275,7 +274,7 @@ textarea {
 #clap_wrap table td .bar {
   width: 12px;
   cursor: pointer;
-  background: #ffffffd3;
+  background: #004e22;
 }
 #clap_wrap table td .bar i {
   display: none;

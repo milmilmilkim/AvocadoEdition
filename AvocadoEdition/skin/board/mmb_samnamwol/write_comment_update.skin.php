@@ -6,7 +6,7 @@ $customer_sql = "";
 $temp_wr_id = $comment_id;
 $wr_num = $wr['wr_num'];
 
-// include_once($board_skin_path.'/write_update.inc.php');  
+include_once($board_skin_path . '/write_edit.inc.php');
 
 if ($bf_file_del) {
 	$file = sql_fetch("select * from {$g5['board_file_table']} where bo_table='{$bo_table}' and wr_id='{$comment_id}' and bf_no='0'");
@@ -41,6 +41,8 @@ if ($_FILES['bf_file']['name']) {
 	}
 	$customer_sql .= ",wr_type='UPLOAD', wr_file='1', wr_width='{$files['img'][0]}', wr_height='{$files['img'][1]}'";
 }
+
+$customer_sql .= " ,wr_option='$html'";
 
 if ($w != 'cu') {
 	$sql = " update {$write_table}

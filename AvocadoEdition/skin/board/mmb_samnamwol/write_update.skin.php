@@ -5,15 +5,15 @@ if (!defined("_GNUBOARD_"))
 $it = array();
 $customer_sql = "";
 $temp_wr_id = $wr_id;
-
 if (!$wr_num)
 	$wr_num = $write['wr_num'];
+
 
 
 if ($write['wr_ing'] != '1' || $w == 'u') {
 
 	// 췩이 아니거나 글이 수정하고 난 뒤일때 
-	// include_once($board_skin_path . '/write_update.inc.php');
+	include_once($board_skin_path . '/write_edit.php');
 
 
 	if ($wr_type == 'TEXT') {
@@ -26,6 +26,7 @@ if ($write['wr_ing'] != '1' || $w == 'u') {
 				{$customer_sql}
 			  where wr_id = '{$wr_id}' ";
 	sql_query($sql);
+
 }
 
 
